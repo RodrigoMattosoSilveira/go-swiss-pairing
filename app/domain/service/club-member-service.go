@@ -1,7 +1,6 @@
 package service
 
 import (
-	"fmt"
 	"github.com/RodrigoMattosoSilveira/go-swiss-pairing/app/domain/repository"
 )
 
@@ -14,13 +13,12 @@ func NewClubMemberService(repo repository.ClubMemberRepository) *ClubMemberServi
 		repo: repo,
 	}
 }
-func (s *ClubMemberService) Duplicated(email string) error {
-	clubMember, err := s.repo.ReadByEmail(email)
-	if clubMember != nil {
-		return fmt.Errorf("%s already exists", email)
-	}
+
+// DuplicatedEmail returns an error if there is a club member with this email, false otherwise
+func (s *ClubMemberService) DuplicatedEmail(email string) bool {
+	_, err := s.repo.ReadByEmail(email)
 	if err != nil {
-		return err
+		return false
 	}
-	return nil
+	return true
 }

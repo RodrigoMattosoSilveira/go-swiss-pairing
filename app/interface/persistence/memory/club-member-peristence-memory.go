@@ -1,6 +1,7 @@
 package memory
 
 import (
+	"fmt"
 	"github.com/RodrigoMattosoSilveira/go-swiss-pairing/app/domain/model"
 	"sync"
 )
@@ -24,7 +25,19 @@ func NewClubMemberRepository() *clubMemberRepository {
 	}
 }
 
-func (r *clubMemberRepository) ReadAll() ([]*model.ClubMember, error) {
+func (r *clubMemberRepository) Create(clubMember *model.ClubMember) (*model.ClubMember, error) {
+	r.mu.Lock()
+	defer r.mu.Unlock()
+
+	r.clubMembers[clubMember.Id()] = &clubMemberMemory{
+		Id:    clubMember.Id(),
+		First: clubMember.First(),
+		Email: clubMember.Email(),
+	}
+	return clubMember, nil
+}
+
+func (r *clubMemberRepository) Read() ([]*model.ClubMember, error) {
 	r.mu.Lock()
 	defer r.mu.Unlock()
 
@@ -46,9 +59,10 @@ func (r *clubMemberRepository) ReadById(id string) (*model.ClubMember, error) {
 			return model.NewClubMember(clubMember.Id, clubMember.First, clubMember.Email), nil
 		}
 	}
-	return nil, nil
+	return nil, fmt.Errorf("CubMember/ReadById: unable to find Club Member with Id: %s", id)
 }
 
+// ReadByEmail returns the ClubMember if there is a Club Member with this email, an error otherwise
 func (r *clubMemberRepository) ReadByEmail(email string) (*model.ClubMember, error) {
 	r.mu.Lock()
 	defer r.mu.Unlock()
@@ -58,16 +72,5 @@ func (r *clubMemberRepository) ReadByEmail(email string) (*model.ClubMember, err
 			return model.NewClubMember(clubMember.Id, clubMember.First, clubMember.Email), nil
 		}
 	}
-	return nil, nil
-}
-func (r *clubMemberRepository) Create(clubMember *model.ClubMember) (*model.ClubMember, error) {
-	r.mu.Lock()
-	defer r.mu.Unlock()
-
-	r.clubMembers[clubMember.Id()] = &clubMemberMemory{
-		Id:    clubMember.Id(),
-		First: clubMember.First(),
-		Email: clubMember.Email(),
-	}
-	return clubMember, nil
+	return nil, fmt.Errorf("CubMember/ReadByEmail: unable to find Club Member with Email: %s", email)
 }

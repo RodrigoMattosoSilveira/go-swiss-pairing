@@ -1,6 +1,7 @@
 package usecase
 
 import (
+	"fmt"
 	"github.com/RodrigoMattosoSilveira/go-swiss-pairing/app/domain/model"
 	"github.com/RodrigoMattosoSilveira/go-swiss-pairing/app/domain/repository"
 	"github.com/RodrigoMattosoSilveira/go-swiss-pairing/app/domain/service"
@@ -18,7 +19,7 @@ import (
 
 type IClubMemberUsecase interface {
 	Create(first string, email string) (*model.ClubMember, error)
-	ReadAll() ([]*model.ClubMember, error)
+	Read() ([]*model.ClubMember, error)
 	ReadById(id string) (*model.ClubMember, error)
 	ReadByEmail(email string) (*model.ClubMember, error)
 }
@@ -42,19 +43,19 @@ func (cm *ClubMemberUsecase) Create(first, email string) (*model.ClubMember, err
 	if err != nil {
 		return nil, err
 	}
-	if err := cm.service.Duplicated(email); err != nil {
-		return nil, err
+	if cm.service.DuplicatedEmail(email) {
+		return nil, fmt.Errorf("club-member-usecase/Create: Club Member with Email: %s already exists", email)
 	}
 	clubMemberModel := model.NewClubMember(uid.String(), first, email)
 	clubMember, clubMemberErr := cm.repo.Create(clubMemberModel)
-	if clubMember != nil {
-		return clubMember, clubMemberErr
+	if clubMemberErr != nil {
+		return nil, clubMemberErr
 	}
-	return nil, clubMemberErr
+	return clubMember, nil
 }
 
-func (cm *ClubMemberUsecase) ReadAll() ([]*model.ClubMember, error) {
-	clubMembers, err := cm.repo.ReadAll()
+func (cm *ClubMemberUsecase) Read() ([]*model.ClubMember, error) {
+	clubMembers, err := cm.repo.Read()
 	if err != nil {
 		return nil, err
 	}
@@ -70,26 +71,9 @@ func (cm *ClubMemberUsecase) ReadByEmail(email string) (*model.ClubMember, error
 }
 
 func (cm *ClubMemberUsecase) ReadById(id string) (*model.ClubMember, error) {
-	clubMember, err := cm.repo.ReadByEmail(id)
+	clubMember, err := cm.repo.ReadById(id)
 	if err != nil {
 		return nil, err
 	}
 	return clubMember, nil
 }
-
-//
-//func toCLubMember(clubMembers []*model.ClubMember) []*model.ClubMember {
-//	res := make([]*model.ClubMember, len(clubMembers))
-//	for i, clubMember := range clubMembers {
-//		res[i] = fromModelToDao(clubMember)
-//	}
-//	return res
-//}
-//
-//func fromModelToDao(cm *model.ClubMember) *model.ClubMember {
-//	return &model.ClubMember{
-//		id:    cm.Id(),
-//		first: cm.First(),
-//		email: cm.Email(),
-//	}
-//}
