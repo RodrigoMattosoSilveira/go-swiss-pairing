@@ -6,6 +6,7 @@ service MemberService {
     rpc Read(MemberEmpty) returns (stream Member) {}
     rpc ReadEmail(MemberEmail) returns (Member) {}
     rpc ReadId(MemberId) returns (Member) {}
+    rpc Ping(MemberPing) returns (MemberPong) {}
 }
 
 // Comment
@@ -28,5 +29,13 @@ message MemberId {
 
 message MemberEmail {
     string email = 1;
+}
+
+message MemberPing {
+    string pong = 1;
+}
+
+message MemberPong {
+    string pong = 1;
 }
 
