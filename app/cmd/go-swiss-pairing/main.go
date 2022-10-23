@@ -25,13 +25,13 @@ func main() {
 		log.Fatalf("failed to listen: %v", err)
 	}
 
-	repository := repo.NewClubMemberRepository()
-	svc := service.NewClubMemberService(repository)
-	useCase := uc.NewClubMemberUsecase(repository, svc)
-	server := grpcServer.NewClubMemberGrpcServer(useCase)
+	repository := repo.NewMemberRepository()
+	svc := service.NewMemberService(repository)
+	useCase := uc.NewMemberUsecase(repository, svc)
+	server := grpcServer.NewMemberGrpcServer(useCase)
 
 	s := grpc.NewServer()
-	pb.RegisterClubMemberServiceServer(s, server)
+	pb.RegisterMemberServiceServer(s, server)
 	log.Printf("server listening at %v", lis.Addr())
 	if err := s.Serve(lis); err != nil {
 		log.Fatalf("failed to serve: %v", err)

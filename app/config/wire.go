@@ -6,7 +6,7 @@ import (
 	"github.com/google/wire"
 )
 
-func InitializeEvent() usecase.ClubMemberUsecase {
-	wire.Build(NewClubMemberRepository, NewClubMemberService, NewClubMemberUsecase, NewClubMemberGrpcServer)
-	return NewClubMemberGrpcServer{}
+func InitializeEvent() usecase.MemberUsecase {
+	wire.Build(NewMemberRepository, NewMemberService, NewMemberUsecase, NewMemberGrpcServer)
+	return NewMemberGrpcServer{}
 }

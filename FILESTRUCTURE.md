@@ -54,29 +54,29 @@ With time the `model` package will grow to aggregate many `Forms` and related `V
 ```go
 package model
 
-type ClubMember struct {
+type Member struct {
 	id string
 	first string
 	email string
 }
 
-func NewCluMember (id string, first string, email string) *ClubMember {
-	return &ClubMember{
+func Create (id string, first string, email string) *Member {
+	return &Member{
 		id:    id,
 		first: first,
 		email: email
 	}
 }
 
-func (cm ClubMember)  Id () string {
+func (cm Member)  Id () string {
 	return cm.id
 }
 
-func (cm ClubMember)  First () string {
+func (cm Member)  First () string {
 	return cm.first
 }
 
-func (cm ClubMember)  Email () string {
+func (cm Member)  Email () string {
 	return cm.email
 }
 ```
@@ -89,39 +89,39 @@ package repository
 
 import "github.com/RodrigoMattosoSilveira/go-swiss-pairing/app/domain/model"
 
-type ClubMemberRepository interface {
-	// FindAll find all club members
-	FindAll() ([]*model.ClubMember, error)
-	// FindByEmail find a club member with the given email
-	FindByEmail(email string) (*model.ClubMember, error)
-	// Save club member with
-	Save(*model.ClubMember) (*model.ClubMember, error)
+type MemberRepository interface {
+	// FindAll find all Member members
+	FindAll() ([]*model.Member, error)
+	// FindByEmail find a Member member with the given email
+	FindByEmail(email string) (*model.Member, error)
+	// Save Member member with
+	Save(*model.Member) (*model.Member, error)
 }
 ```
 
-****NOTE** that this layer does not know where the `Club Member` `Form` is saved or serialized.
+****NOTE** that this layer does not know where the `Member Member` `Form` is saved or serialized.
 
 ### Service
-Here we implement logic to manipulate the models. For exampleto validate that the `Club Member email` is unique we would write something like:
+Here we implement logic to manipulate the models. For exampleto validate that the `Member Member email` is unique we would write something like:
 ```go
-func (u *ClubMember) Duplicated(email string) bool {
-        // Find club member by email from persistence layer...
+func (u *Member) Duplicated(email string) bool {
+        // Find Member member by email from persistence layer...
 }
 ```
 
-The `Duplicated` function is business logic that does not belong in the `Club Member` model. We solve it by ading a service layer like below:
+The `Duplicated` function is business logic that does not belong in the `Member Member` model. We solve it by ading a service layer like below:
 ```go
 package service
 
 import "github.com/RodrigoMattosoSilveira/go-swiss-pairing/app/domain/repository"
 
-type ClubMemberService struct {
-	repo repository. ClubMemberRepository
+type MemberService struct {
+	repo repository. MemberRepository
 }
 
-func (s *ClubMemberService) Duplicated(email string) error {
-	clubMember, err := s.repo.FindByEmail(email)
-	if clubMember != nil {
+func (s *MemberService) Duplicated(email string) error {
+	Member, err := s.repo.FindByEmail(email)
+	if Member != nil {
 		return fmt.Errorf("%s already exists", email)
 	}
 	if err != nil {
@@ -132,7 +132,7 @@ func (s *ClubMemberService) Duplicated(email string) error {
 ```
 
 ## Use Cases - Red Layer
-Hosted at the `app/usecase` folder, it holds units of one operation, such as registering and listing `club members`, as suggested by the following interface:
+Hosted at the `app/usecase` folder, it holds units of one operation, such as registering and listing `Member members`, as suggested by the following interface:
 ```go
 type UserUsecase interface {
     ListUser() ([]*User, error)
@@ -140,28 +140,28 @@ type UserUsecase interface {
 }
 ```
  
-A more comprehensive `Club Member` implementation would be something like:
+A more comprehensive `Member Member` implementation would be something like:
 ```go
-type clubMemberUsecase struct {
-    repo    repository.ClubMemberRepository
-    service *service.ClubMemberService
+type MemberUsecase struct {
+    repo    repository.MemberRepository
+    service *service.MemberService
 }
-func NewClubMemberUsecase(repo repositoryClubMemberRepository, service *service.ClubMemberService) *clubMemberUsecase {
+func NewMemberUsecase(repo repositoryMemberRepository, service *service.MemberService) *MemberUsecase {
     return &ubMemberUsecase {
         repo:    repo,
         service: service,
     }
 }
-// ListClubMember list all club members
-func (cm *clubMemberUsecase) ListClubMember() ([]*ClubMember, error) {
-    clubMembers, err := cm.repo.FindAll()
+// ListMember list all Member members
+func (cm *MemberUsecase) ListMember() ([]*Member, error) {
+    Members, err := cm.repo.FindAll()
     if err != nil {
         return nil, err
     }
-    return toClubMember(clubMembers), nil
+    return toMember(Members), nil
 }
-// RegisterClubMember Register a new club member
-func (cm *clubMemberUsecase) RegisterClubMember(first string, email string) error {
+// RegisterMember Register a new Member member
+func (cm *MemberUsecase) RegisterMember(first string, email string) error {
     uid, err := uuid.NewRandom()
     if err != nil {
         return err
@@ -169,30 +169,30 @@ func (cm *clubMemberUsecase) RegisterClubMember(first string, email string) erro
     if err := u.service.Duplicated(email); err != nil {
         return err
     }
-    clubMember := model.NewClubMember(uid.String(), first, email)
-    if err := u.repo.Save(clubMember); err != nil {
+    Member := model.NewMember(uid.String(), first, email)
+    if err := u.repo.Save(Member); err != nil {
         return err
     }
     return nil
 }
 ```
 
-`clubMemberUsercase` depends on two packages, i) repository.ClubMemberRepository interface and ii) *service.ClubMemberService struct. Above, we injected  these two packages when we initialized clubMemberUsecase. An alternate and more efficient mechanism to set up those dependencies is to use a DI container, which we will discuss shortly.
+`MemberUsercase` depends on two packages, i) repository.MemberRepository interface and ii) *service.MemberService struct. Above, we injected  these two packages when we initialized MemberUsecase. An alternate and more efficient mechanism to set up those dependencies is to use a DI container, which we will discuss shortly.
 
-Also, note that `FindAll` above retrieves `Model.ClubMembers`, not `ClubMembers` encapsulating undesirable business know how when retrieving ClubMembers; hence we expanded `Model.ClubMember` to include logic, `toClubMember` to return only `ClubMembers`:
+Also, note that `FindAll` above retrieves `Model.Members`, not `Members` encapsulating undesirable business know how when retrieving Members; hence we expanded `Model.Member` to include logic, `toMember` to return only `Members`:
 ```go
-type ClubMember struct {
+type Member struct {
     id string
     first string
     email string
 }
 ...
-func toClubMember(clubMembers []*model.ClubMember) []*ClubMember {
-    res := make([]*ClubMember, len(clubMembers))
-    for i, clubMember := range clubMembers {
-        res[i] = &ClubMember{
-            ID:    clubMember.GetID(),
-			First:  clubMember.First,
+func toMember(Members []*model.Member) []*Member {
+    res := make([]*Member, len(Members))
+    for i, Member := range Members {
+        res[i] = &Member{
+            ID:    Member.GetID(),
+			First:  Member.First,
             Email: user.GetEmail(),
         }
     }
@@ -208,60 +208,60 @@ Hosted at the `app/interface` folder, it holds concrete objects like API endpoin
 ### Persistence
 Hosted at the `app/interface/persistence folder`, below is a concrete implementation of the repository, in memory; we would require a different one to persist it in another medium:
 ```go
-type clubMemberRepository struct {
+type MemberRepository struct {
     mu    *sync.Mutex
-	clubMembers map[string]*ClubMember
+	Members map[string]*Member
 }
 
-// NewClubMemberRepository return the repo
-func NewClubMemberRepository() *clubMemberRepository {
-    return &clubMemberRepository {
+// NewMemberRepository return the repo
+func NewMemberRepository() *MemberRepository {
+    return &MemberRepository {
         mu:    &sync.Mutex{},
-        clubMembers: map[string]*ClubMember{},
+        Members: map[string]*Member{},
     }
 }
 
-// FindAll find all club members 
-func (r *clubMemberRepository) FindAll() ([]*model.ClubMember, error) {
+// FindAll find all Member members 
+func (r *MemberRepository) FindAll() ([]*model.Member, error) {
     r.mu.Lock()
     defer r.mu.Unlock()
-    clubMembers := make([]*model.ClubMember, len(r.clubMembers))
+    Members := make([]*model.Member, len(r.Members))
     i := 0
-    for _, clubMember := range r.clubMembers {
-        clubMembers[i] = model.NewClubMember(clubMember.ID, clubMember.First, clubMember.Email)
+    for _, Member := range r.Members {
+        Members[i] = model.NewMember(Member.ID, Member.First, Member.Email)
         i++
     }
-    return clubMembers, nil
+    return Members, nil
 }
 
-// FindByEmail find a club member based on their email
-func (r *clubMemberRepository) FindByEmail(email string) (*model.ClubMember, error) {
+// FindByEmail find a Member member based on their email
+func (r *MemberRepository) FindByEmail(email string) (*model.Member, error) {
     r.mu.Lock()
     defer r.mu.Unlock()
-    for _, clubMember := range r.clubMembers {
-        if clubMember.Email == email {
-            return  model.NewClubMember(clubMember.ID, clubMember.First, clubMember.Email), nil
+    for _, Member := range r.Members {
+        if Member.Email == email {
+            return  model.NewMember(Member.ID, Member.First, Member.Email), nil
         }
     }
     return nil, nil
 }
 
-// Save Add a new Club Member
-func (r *clubMemberRepository) Save(clubMember *model.ClubMember) error {
+// Save Add a new Member Member
+func (r *MemberRepository) Save(Member *model.Member) error {
     r.mu.Lock()
     defer r.mu.Unlock()
-        r.clubMembers[user.GetID()] = &ClubMember {
-        ID:    clubMember.GetID(),
-		First:  clubMember.GetFirst(), 
-        Email: clubMember.GetEmail(),
+        r.Members[user.GetID()] = &Member {
+        ID:    Member.GetID(),
+		First:  Member.GetFirst(), 
+        Email: Member.GetEmail(),
     }
     return nil
 }
 ```
 
-Note that, regardless the medium, the `Model.ClubMember` remaining unchanged, remaining oblivious of the actual implementation:
+Note that, regardless the medium, the `Model.Member` remaining unchanged, remaining oblivious of the actual implementation:
 ```go
-type ClubMember struct {
+type Member struct {
     ID    string
 	First string
     Email string
