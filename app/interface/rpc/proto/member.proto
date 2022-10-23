@@ -1,0 +1,32 @@
+syntax = "proto3";
+package proto;
+option go_package = "go-swiss-pairing/app/interface/rpc/proto/member.proto" ;
+service MemberService {
+    rpc Create(NewMember) returns (Member) {}
+    rpc Read(MemberEmpty) returns (stream Member) {}
+    rpc ReadEmail(MemberEmail) returns (Member) {}
+    rpc ReadId(MemberId) returns (Member) {}
+}
+
+// Comment
+message MemberEmpty {}
+
+message NewMember {
+    string first = 1;
+    string email = 2;
+}
+
+message Member {
+    string id = 1;
+    string first = 2;
+    string email = 3;
+}
+
+message MemberId {
+    string id = 1;
+}
+
+message MemberEmail {
+    string email = 1;
+}
+

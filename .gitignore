@@ -14,3 +14,5 @@
 # Dependency directories (remove the comment below to include it)
 # vendor/
 club-member_grpc_web_pb.js
+member_grpc_web_pb.js
+member_pb.js

@@ -8,8 +8,8 @@ A tool for tournament directors to organize tournaments using the Swiss pairing 
 
 # The path to get what I want:
 -  [x] Refactor the go-swiss-pairing Makefile to use dependencies, see react-grpc-go for reference
--  [ ] Refactor the go-swiss-pairing club-member service name to member;
--  [ ] Add a ping rpc handler to MemberService ;
+-  [x] Refactor the go-swiss-pairing club-member service name to member;
+-  [ ] Add a ping service to MemberService;
 -  [ ] Replace the go-swiss-pairing gRPC server (not service) with the react-grpc-go, service, including certificates, etc
 -  [ ] Add the react-grpc-go UI to go-swiss-pairing, replacing pingpong PingPong with the Member ping call
 -  [ ] Refactor the UI to use the nexjs-ts-materio-template folder structure
