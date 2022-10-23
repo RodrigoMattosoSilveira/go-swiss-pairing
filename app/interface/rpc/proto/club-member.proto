@@ -8,6 +8,7 @@ service ClubMemberService {
     rpc ReadId(ClubMemberId) returns (ClubMember) {}
 }
 
+// Comment
 message ClubMemberEmpty {}
 
 message NewClubMember {
