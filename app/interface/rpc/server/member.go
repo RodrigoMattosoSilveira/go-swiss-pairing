@@ -74,3 +74,10 @@ func (c *MemberGrpcServer) ReadId(_ context.Context, Member *cm.MemberId) (*cm.M
 	}
 	return readMemberEmail, nil
 }
+
+func (c *MemberGrpcServer) Ping(_ context.Context, Member *cm.MemberPing) (*cm.MemberPong, error) {
+	pong := &cm.MemberPong{
+		Pong: "pong",
+	}
+	return pong, nil
+}
