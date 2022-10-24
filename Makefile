@@ -20,8 +20,11 @@ GO_MAIN = ./app/cmd/go-swiss-pairing/main
 GO_FILES = $(call rwildcard, $(GO_DIR) , *.go)
 all_go_files: $(GO_FILES)
 
-all: $(PB_GO_FILES) $(GO_MAIN)
-.PHONY: all
+.DEFAULT: build
+
+.PHONY: build
+build: $(PB_GO_FILES) $(GO_MAIN)
+
 
 # Build the go files to support gRPC operations. Given a folder with *.proto files, when I run my make rule, it builds
 # their *.pb.go files in the same folder.
