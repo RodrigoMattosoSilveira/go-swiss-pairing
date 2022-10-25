@@ -2,6 +2,13 @@ export PATH := $(HOME)/.local/bin:$(PATH)
 
 rwildcard=$(foreach d,$(wildcard $1*),$(call rwildcard,$d/,$2) $(filter $(subst *,%,$2),$d))
 
+# Certificate variables
+CERT_DIR=./cert
+CERT_SCRIPT=$(CERT_DIR)/gencert.zsh
+CERT_CONF=$(CERT_DIR)/server-ext.cnf
+CERT_SERVER_PEM=$(CERT_DIR)/server-cert.pem
+
+# gRPC variables
 PB_VER = 21.4
 PB_URL =  https://github.com/protocolbuffers/protobuf/releases/download/v${PB_VER}
 PB_PREFIX =  protoc
@@ -20,11 +27,9 @@ GO_MAIN = ./app/cmd/go-swiss-pairing/main
 GO_FILES = $(call rwildcard, $(GO_DIR) , *.go)
 all_go_files: $(GO_FILES)
 
-.DEFAULT: build
-
-.PHONY: build
-build: $(PB_GO_FILES) $(GO_MAIN)
-
+# Install certificates
+$(CERT_SERVER_PEM) : $(CERT_SCRIPT) $(CERT_CONF)
+	$(CERT_SCRIPT)
 
 # Build the go files to support gRPC operations. Given a folder with *.proto files, when I run my make rule, it builds
 # their *.pb.go files in the same folder.
@@ -36,7 +41,7 @@ $(PB_GO_FILES): %.pb.go: %.proto
 		$<
 
 # Build Server
-$(GO_MAIN): $(GO_FILES)
+$(GO_MAIN): $(GO_FILES) $(CERT_SERVER_PEM)
 	go build -o $(GO_MAIN) $(GO_MAIN).go
 
 .PHONY: setup
@@ -58,3 +63,9 @@ run:
 .PHONY: show_go_files
 show_go_files:
 	echo $(GO_FILES)
+
+.PHONY: build
+build: $(CERT_SERVER_PEM) $(PB_GO_FILES) $(GO_MAIN)
+
+# The default goal
+.DEFAULT_GOAL := build
