@@ -16,8 +16,8 @@ PB_FN  = osx-x86_64.zip
 PB_OSX = ${PB_PREFIX}-${PB_VER}-${PB_FN}
 
 # gRPC variables
-PROTODIR = ./app/interface/rpc/proto
-PROTO_FILES = $(wildcard $(PROTODIR)/*.proto)
+PROTO_DIR = ./app/interface/rpc/proto
+PROTO_FILES = $(wildcard $(PROTO_DIR)/*.proto)
 PB_GO_FILES = $(PROTO_FILES:.proto=.pb.go)
 all_pb_go_files: $(PB_GO_FILES)
 
@@ -65,7 +65,7 @@ show_go_files:
 	echo $(GO_FILES)
 
 .PHONY: build
-build: $(CERT_SERVER_PEM) $(PB_GO_FILES) $(GO_MAIN)
+build: $(CERT_SERVER_PEM) $(PB_GO_FILES) $(GO_MAIN) run
 
 # The default goal
 .DEFAULT_GOAL := build

@@ -18,3 +18,4 @@ A tool for tournament directors to organize tournaments using the Swiss pairing 
 
 # Links and References
 * Link to the [Recursive Wildcard Function](https://blog.jgc.org/2011/07/gnu-make-recursive-wildcard-function.html) I used to build a list of dependencies
+* [Using gRPC with TLS, Golang and React (No Envoy)](https://itnext.io/using-grpc-with-tls-golang-and-react-no-envoy-92e898bf8463)
