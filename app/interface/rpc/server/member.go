@@ -2,6 +2,8 @@ package server
 
 import (
 	"context"
+	"errors"
+	"fmt"
 	cm "github.com/RodrigoMattosoSilveira/go-swiss-pairing/app/interface/rpc/proto"
 	"github.com/RodrigoMattosoSilveira/go-swiss-pairing/app/usecase"
 	"sync"
@@ -76,6 +78,10 @@ func (c *MemberGrpcServer) ReadId(_ context.Context, Member *cm.MemberId) (*cm.M
 }
 
 func (c *MemberGrpcServer) Ping(_ context.Context, Member *cm.MemberPing) (*cm.MemberPong, error) {
+	if Member.Ping != "ping" {
+		message := fmt.Sprintf("Invalid ping paayload %s", Member.Ping)
+		return nil, errors.New(message)
+	}
 	pong := &cm.MemberPong{
 		Pong: "pong",
 	}

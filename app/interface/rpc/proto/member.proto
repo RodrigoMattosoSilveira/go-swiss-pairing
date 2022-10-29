@@ -32,7 +32,7 @@ message MemberEmail {
 }
 
 message MemberPing {
-    string pong = 1;
+    string ping = 1;
 }
 
 message MemberPong {

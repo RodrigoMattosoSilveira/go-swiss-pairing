@@ -16,3 +16,9 @@
 club-member_grpc_web_pb.js
 member_grpc_web_pb.js
 member_pb.js
+ca-cert.pem
+ca-cert.srl
+ca-key.pem
+server-cert.pem
+server-key.pem
+server-req.pem
