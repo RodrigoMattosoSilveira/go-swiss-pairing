@@ -21,9 +21,10 @@ PROTO_FILES = $(wildcard $(PROTO_DIR)/*.proto)
 PB_GO_FILES = $(PROTO_FILES:.proto=.pb.go)
 all_pb_go_files: $(PB_GO_FILES)
 
-# GO Files
+# GO Server Files
 GO_DIR = ./app
-GO_MAIN = ./app/cmd/go-swiss-pairing/main
+GO_SERVER = $(GO_DIR)/server/main
+GO_CLIENT = $(GO_DIR)/client/main
 GO_FILES = $(call rwildcard, $(GO_DIR) , *.go)
 all_go_files: $(GO_FILES)
 
@@ -41,8 +42,12 @@ $(PB_GO_FILES): %.pb.go: %.proto
 		$<
 
 # Build Server
-$(GO_MAIN): $(GO_FILES) $(CERT_SERVER_PEM)
-	go build -o $(GO_MAIN) $(GO_MAIN).go
+$(GO_SERVER): $(GO_FILES) $(CERT_SERVER_PEM)
+	go build -o $(GO_SERVER) $(GO_SERVER).go
+
+# Build Client
+$(GO_CLIENT): $(GO_FILES) $(CERT_SERVER_PEM)
+	go build -o $(GO_CLIENT) $(GO_CLIENT).go
 
 .PHONY: setup
 setup: ## Install dependencies
@@ -56,16 +61,21 @@ setup: ## Install dependencies
 	go install google.golang.org/protobuf/cmd/protoc-gen-go@latest
 	go install github.com/google/wire/cmd/wire@latest
 
-.PHONY: run
-run:
-	./app/cmd/go-swiss-pairing/main
+.PHONY: run_server
+run_server:
+	$(GO_SERVER)
+
+.PHONY: run_client
+run_client:
+	$(GO_CLIENT)
 
 .PHONY: show_go_files
 show_go_files:
 	echo $(GO_FILES)
 
 .PHONY: build
-build: $(CERT_SERVER_PEM) $(PB_GO_FILES) $(GO_MAIN) run
+build: $(CERT_SERVER_PEM) $(PB_GO_FILES) $(GO_SERVER) $(GO_CLIENT) run_server
+
 
 # The default goal
 .DEFAULT_GOAL := build
