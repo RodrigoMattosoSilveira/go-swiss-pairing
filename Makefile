@@ -7,6 +7,7 @@ CERT_DIR=./cert
 CERT_SCRIPT=$(CERT_DIR)/gencert.zsh
 CERT_CONF=$(CERT_DIR)/server-ext.cnf
 CERT_SERVER_PEM=$(CERT_DIR)/server-cert.pem
+GENERATED_CERT_FILES=$(shell find $(CERT_DIR) -type f \( -name "*.pem" -o -name "*.srl" \))
 
 # gRPC variables
 PB_VER = 21.4
@@ -86,8 +87,13 @@ run_server:
 run_client:
 	$(GO_CLIENT)
 
-clean_cert:
+# Clean the generated gRPC files
+clean_grpc:
 	rm $(GENERATED_GRPC_FILES)
+
+# Clean the generated certificates
+clean_cert:
+	rm $(GENERATED_CERT_FILES)
 
 # The default goal
 .DEFAULT_GOAL := build
