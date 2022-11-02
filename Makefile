@@ -37,7 +37,13 @@ GO_CLIENT = $(GO_DIR)/client/main
 # Not yet
 
 # Keep all PHONY tasks definitions together
-.PHONY: setup run_server run_client build
+.PHONY: setup \
+		build \
+		clean \
+		clean_cert \
+		clean_grpc \
+		run_server \
+		run_client
 
 # Install dependencies
 setup:
@@ -94,6 +100,15 @@ clean_grpc:
 # Clean the generated certificates
 clean_cert:
 	rm $(GENERATED_CERT_FILES)
+
+# Clean all generated files
+clean: clean_cert clean_grpc
+
+# Test targets
+# TBD server, client, ui, all
+
+# Install targets
+# TBD install, uninstall
 
 # The default goal
 .DEFAULT_GOAL := build
