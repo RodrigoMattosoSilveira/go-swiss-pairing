@@ -5,6 +5,7 @@ import (
 	"crypto/tls"
 	"crypto/x509"
 	"flag"
+	"io"
 	"io/ioutil"
 	"log"
 
@@ -15,14 +16,17 @@ import (
 )
 
 func main() {
-	var op string
+	var op, id, name, email string
 	flag.StringVar(&op, "op", "ping", "the operation we want to execute")
+	flag.StringVar(&id, "id", "NONE", "the member id")
+	flag.StringVar(&name, "name", "NONE", "the member name")
+	flag.StringVar(&email, "email", "NONE", "the member email")
 	flag.Parse()
-
-	type Member struct {
-		First string
-		Email string
-	}
+	//
+	//type Member struct {
+	//	First string
+	//	Email string
+	//}
 
 	ctx := context.Background()
 	// Load our TLS certificate and use grpc/credentials to create new transport credentials
@@ -33,7 +37,12 @@ func main() {
 	if err != nil {
 		log.Fatal(err)
 	}
-	defer conn.Close()
+	defer func(conn *grpc.ClientConn) {
+		err := conn.Close()
+		if err != nil {
+			log.Fatal(err)
+		}
+	}(conn)
 	// A new GRPC client to use
 	client := memberGrpc.NewMemberServiceClient(conn)
 
@@ -46,21 +55,51 @@ func main() {
 		}
 		log.Println(pong)
 	case "create":
-		newMember, err := client.Create(ctx, &memberGrpc.NewMember{First: "mario", Email: "mario@yahoo.com"})
+		if name == "NONE" {
+			log.Fatal("Name not provided")
+		}
+		if email == "NONE" {
+			log.Fatal("Email not provided")
+		}
+		newMember, err := client.Create(ctx, &memberGrpc.NewMember{First: name, Email: email})
 		if err != nil {
 			log.Fatal(err)
 		}
 		log.Printf("Created: id: %s name: %s email: %s\n", newMember.Id, newMember.First, newMember.Email)
 	case "read":
-		log.Println("Reading")
+		stream, err := client.Read(context.Background(), &memberGrpc.MemberEmpty{})
+		if err != nil {
+			log.Fatal(err)
+		}
+		done := make(chan bool)
+		go func() {
+			for {
+				member, err := stream.Recv()
+				if err == io.EOF {
+					done <- true //means stream is finished
+					return
+				}
+				if err != nil {
+					log.Fatalf("cannot receive %v", err)
+				}
+				log.Printf("Read member / id: %s, name: %s, email: %s\n", member.Id, member.First, member.Email)
+			}
+		}()
+		<-done //we will wait until all response is received
 	case "readEmail":
-		member, err := client.ReadEmail(ctx, &memberGrpc.MemberEmail{Email: "mario@yahoo.com"})
+		if email == "NONE" {
+			log.Fatal("Email not provided")
+		}
+		member, err := client.ReadEmail(ctx, &memberGrpc.MemberEmail{Email: email})
 		if err != nil {
 			log.Fatal(err)
 		}
 		log.Printf("Created: id: %s name: %s email: %s\n", member.Id, member.First, member.Email)
 	case "readId":
-		member, err := client.ReadId(ctx, &memberGrpc.MemberId{Id: "d67b65cf-5e50-4eae-94c8-3019c058c1d5"})
+		if id == "NONE" {
+			log.Fatal("Id not provided")
+		}
+		member, err := client.ReadId(ctx, &memberGrpc.MemberId{Id: id})
 		if err != nil {
 			log.Fatal(err)
 		}
