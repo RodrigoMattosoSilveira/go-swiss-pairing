@@ -19,6 +19,11 @@ func main() {
 	flag.StringVar(&op, "op", "ping", "the operation we want to execute")
 	flag.Parse()
 
+	type Member struct {
+		First string
+		Email string
+	}
+
 	ctx := context.Background()
 	// Load our TLS certificate and use grpc/credentials to create new transport credentials
 	creds := credentials.NewTLS(loadTLSCfg())
@@ -40,6 +45,26 @@ func main() {
 			log.Fatal(err)
 		}
 		log.Println(pong)
+	case "create":
+		newMember, err := client.Create(ctx, &memberGrpc.NewMember{First: "mario", Email: "mario@yahoo.com"})
+		if err != nil {
+			log.Fatal(err)
+		}
+		log.Printf("Created: id: %s name: %s email: %s\n", newMember.Id, newMember.First, newMember.Email)
+	case "read":
+		log.Println("Reading")
+	case "readEmail":
+		member, err := client.ReadEmail(ctx, &memberGrpc.MemberEmail{Email: "mario@yahoo.com"})
+		if err != nil {
+			log.Fatal(err)
+		}
+		log.Printf("Created: id: %s name: %s email: %s\n", member.Id, member.First, member.Email)
+	case "readId":
+		member, err := client.ReadId(ctx, &memberGrpc.MemberId{Id: "d67b65cf-5e50-4eae-94c8-3019c058c1d5"})
+		if err != nil {
+			log.Fatal(err)
+		}
+		log.Printf("Created: id: %s name: %s email: %s\n", member.Id, member.First, member.Email)
 	default:
 		log.Printf("Invalid operation: %s\n\n", op)
 	}
