@@ -71,6 +71,8 @@ func main() {
 		if err != nil {
 			log.Fatal(err)
 		}
+		// see https://linuxhint.com/golang-make-function/ for a brief discussion on how to use make to create a channel
+		// for to connect concurrent goroutines
 		done := make(chan bool)
 		go func() {
 			for {
