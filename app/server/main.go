@@ -3,8 +3,11 @@ package main
 import (
 	"flag"
 	"github.com/RodrigoMattosoSilveira/go-swiss-pairing/app/constants"
+	"github.com/RodrigoMattosoSilveira/go-swiss-pairing/app/domain/service"
+	repo "github.com/RodrigoMattosoSilveira/go-swiss-pairing/app/interface/persistence/memory"
 	memberGrpc "github.com/RodrigoMattosoSilveira/go-swiss-pairing/app/interface/rpc/proto"
 	pb "github.com/RodrigoMattosoSilveira/go-swiss-pairing/app/interface/rpc/server"
+	uc "github.com/RodrigoMattosoSilveira/go-swiss-pairing/app/usecase"
 	"github.com/improbable-eng/grpc-web/go/grpcweb"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/credentials"
@@ -28,7 +31,7 @@ func main() {
 		log.Fatal(err)
 	}
 	// Start listening on a TCP Port
-	ltcpListener, err := net.Listen("tcp", "127.0.0.1:9990")
+	tcpListener, err := net.Listen("tcp", "127.0.0.1:9990")
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -36,14 +39,17 @@ func main() {
 	// In GRPC cases, the Server is acutally just an Interface
 	// So we need a struct which fulfills the server interface
 	// see server.go
-	memberServiceServer := &pb.MemberGrpcServer{}
+	repository := repo.NewMemberRepository()
+	svc := service.NewMemberService(repository)
+	useCase := uc.NewMemberUsecase(repository, svc)
+	memberServiceServer := pb.NewMemberGrpcServer(useCase)
 	// Register the API server as a PingPong Server
 	// The register function is a generated piece by protoc.
 	memberGrpc.RegisterMemberServiceServer(grpcServer, memberServiceServer)
 
 	// Start serving in a goroutine to not block
 	go func() {
-		log.Fatal(grpcServer.Serve(ltcpListener))
+		log.Fatal(grpcServer.Serve(tcpListener))
 	}()
 	// Wrap the GRPC Server in grpc-web and also host the UI
 	grpcWebServer := grpcweb.WrapServer(grpcServer)
