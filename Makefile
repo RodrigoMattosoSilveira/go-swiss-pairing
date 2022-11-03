@@ -28,7 +28,7 @@ all_pb_go_files: $(PB_GO_FILES)
 GO_DIR = ./app
 GO_SERVER = $(GO_DIR)/server/main
 GO_CLIENT = $(GO_DIR)/client/main
-GO_FILES = $(call rwildcard,,*.pb.go)
+GO_FILES=$(shell find $(GO_DIR) -type f \( -name "*.go" -o -name "*.go" \))
 
 # GO client Files
 GO_CLIENT = $(GO_DIR)/client/main

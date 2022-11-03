@@ -4,6 +4,7 @@ import (
 	"context"
 	"crypto/tls"
 	"crypto/x509"
+	"flag"
 	"io/ioutil"
 	"log"
 
@@ -14,6 +15,10 @@ import (
 )
 
 func main() {
+	var op string
+	flag.StringVar(&op, "op", "ping", "the operation we want to execute")
+	flag.Parse()
+
 	ctx := context.Background()
 	// Load our TLS certificate and use grpc/credentials to create new transport credentials
 	creds := credentials.NewTLS(loadTLSCfg())
@@ -27,11 +32,17 @@ func main() {
 	// A new GRPC client to use
 	client := memberGrpc.NewMemberServiceClient(conn)
 
-	pong, err := client.Ping(ctx, &memberGrpc.MemberPing{Ping: "ping"})
-	if err != nil {
-		log.Fatal(err)
+	// Perform the op
+	switch op {
+	case "ping":
+		pong, err := client.Ping(ctx, &memberGrpc.MemberPing{Ping: "ping"})
+		if err != nil {
+			log.Fatal(err)
+		}
+		log.Println(pong)
+	default:
+		log.Printf("Invalid operation: %s\n\n", op)
 	}
-	log.Println(pong)
 }
 
 // loadTLSCfg will load a certificate and create a tls config
