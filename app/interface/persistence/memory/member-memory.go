@@ -74,3 +74,13 @@ func (r *MemberRepository) ReadByEmail(email string) (*model.Member, error) {
 	}
 	return nil, fmt.Errorf("CubMember/ReadByEmail: unable to find Club Member with Email: %s", email)
 }
+
+// Empty all members; used for testing
+func (r *MemberRepository) Empty() {
+	r.mu.Lock()
+	defer r.mu.Unlock()
+
+	for k := range r.Members {
+		delete(r.Members, k)
+	}
+}
