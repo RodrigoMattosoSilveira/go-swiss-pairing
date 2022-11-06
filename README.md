@@ -7,19 +7,21 @@ A tool for tournament directors to organize tournaments using the Swiss pairing 
 - To use the React Material components in nexjs-ts-materio-template
 
 # The path to get what I want:
-- [x] Refactor the go-swiss-pairing Makefile to use dependencies, see react-grpc-go for reference
-- [x] Refactor the go-swiss-pairing club-member service name to member;
-- [x] Add a ping service to MemberService;
-- [x] Replace the go-swiss-pairing gRPC server (not service) with the react-grpc-go, service, including certificates, etc
-- [ ] Add integration tests
-- [ ] Add the react-grpc-go UI to go-swiss-pairing, replacing pingpong PingPong with the Member ping call
-- [ ] Refactor the UI to use the nexjs-ts-materio-template folder structure
-- [ ] Replace the original simple react-grpc-go UI page with a simple nexjs-ts-materio-template component
-- [ ] Design the landing page, the members page, including logic to CRUD members
+* [x] Refactor the go-swiss-pairing Makefile to use dependencies, see react-grpc-go for reference
+* [x] Refactor the go-swiss-pairing club-member service name to member;
+* [x] Add a ping service to MemberService;
+* [x] Replace the go-swiss-pairing gRPC server (not service) with the react-grpc-go, service, including certificates, etc
+* [ ] Add integration tests
+    * [x] Add `server side` integration tests;
+    * [ ] Add `client side` integration tests;
+* [ ] Add the react-grpc-go UI to go-swiss-pairing, replacing pingpong PingPong with the Member ping call
+* [ ] Refactor the UI to use the nexjs-ts-materio-template folder structure
+* [ ] Replace the original simple react-grpc-go UI page with a simple nexjs-ts-materio-template component
+* [ ] Design the landing page, the members page, including logic to CRUD members
 
 # Links and References
 * Link to the [Recursive Wildcard Function](https://blog.jgc.org/2011/07/gnu-make-recursive-wildcard-function.html) I used to build a list of dependencies
 * [Using gRPC with TLS, Golang and React (No Envoy)](https://itnext.io/using-grpc-with-tls-golang-and-react-no-envoy-92e898bf8463)
 * [How to Set Up gRPC Server-Side Streaming with Go](https://www.freecodecamp.org/news/grpc-server-side-streaming-with-go/)
 * [ginkgo](https://onsi.github.io/ginkgo/) - GOLANG test package that makes it similar to JASMINE and the like
-* [Custom Errors](https://golangbot.com/custom-errors/)
+* [GOLANG Custom Errors](https://golangbot.com/custom-errors/)
