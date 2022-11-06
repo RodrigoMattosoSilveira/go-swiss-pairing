@@ -106,7 +106,8 @@ func (cm *MemberUsecase) Read() ([]*model.Member, error) {
 func (cm *MemberUsecase) ReadByEmail(email string) (*model.Member, error) {
 	Member, err := cm.repo.ReadByEmail(email)
 	if err != nil {
-		return nil, err
+		log.Printf(err.Error())
+		return nil, status.Error(constants.GRPC_STATUS_NOT_FOUND, err.Error())
 	}
 	return Member, nil
 }
@@ -114,7 +115,8 @@ func (cm *MemberUsecase) ReadByEmail(email string) (*model.Member, error) {
 func (cm *MemberUsecase) ReadById(id string) (*model.Member, error) {
 	Member, err := cm.repo.ReadById(id)
 	if err != nil {
-		return nil, err
+		log.Printf(err.Error())
+		return nil, status.Error(constants.GRPC_STATUS_NOT_FOUND, err.Error())
 	}
 	return Member, nil
 }

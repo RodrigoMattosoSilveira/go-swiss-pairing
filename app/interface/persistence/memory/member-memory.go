@@ -1,6 +1,7 @@
 package memory
 
 import (
+	"errors"
 	"fmt"
 	"github.com/RodrigoMattosoSilveira/go-swiss-pairing/app/domain/model"
 	"sync"
@@ -59,7 +60,8 @@ func (r *MemberRepository) ReadById(id string) (*model.Member, error) {
 			return model.Create(Member.Id, Member.First, Member.Email), nil
 		}
 	}
-	return nil, fmt.Errorf("CubMember/ReadById: unable to find Club Member with Id: %s", id)
+	// https://golangbot.com/custom-errors/
+	return nil, errors.New(fmt.Sprintf("did not find member with id: %s", id))
 }
 
 // ReadByEmail returns the Member if there is a Club Member with this email, an error otherwise
@@ -72,7 +74,7 @@ func (r *MemberRepository) ReadByEmail(email string) (*model.Member, error) {
 			return model.Create(Member.Id, Member.First, Member.Email), nil
 		}
 	}
-	return nil, fmt.Errorf("CubMember/ReadByEmail: unable to find Club Member with Email: %s", email)
+	return nil, errors.New(fmt.Sprintf("did not find member with email: %s", email))
 }
 
 // Empty all members; used for testing
