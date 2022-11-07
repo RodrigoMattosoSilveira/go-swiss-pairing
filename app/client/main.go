@@ -18,15 +18,10 @@ import (
 func main() {
 	var op, id, name, email string
 	flag.StringVar(&op, "op", "ping", "the operation we want to execute")
-	flag.StringVar(&id, "id", "NONE", "the member id")
-	flag.StringVar(&name, "name", "NONE", "the member name")
-	flag.StringVar(&email, "email", "NONE", "the member email")
+	flag.StringVar(&id, "id", "", "the member id")
+	flag.StringVar(&name, "name", "", "the member name")
+	flag.StringVar(&email, "email", "", "the member email")
 	flag.Parse()
-	//
-	//type Member struct {
-	//	First string
-	//	Email string
-	//}
 
 	ctx := context.Background()
 	// Load our TLS certificate and use grpc/credentials to create new transport credentials
@@ -55,13 +50,7 @@ func main() {
 		}
 		log.Println(pong)
 	case "create":
-		if name == "NONE" {
-			log.Fatal("Name not provided")
-		}
-		if email == "NONE" {
-			log.Fatal("Email not provided")
-		}
-		newMember, err := client.Create(ctx, &memberGrpc.NewMember{First: name, Email: email})
+		newMember, err := clientMemberCreate(client, ctx, name, email)
 		if err != nil {
 			log.Fatal(err)
 		}
@@ -71,6 +60,8 @@ func main() {
 		if err != nil {
 			log.Fatal(err)
 		}
+		// see https://linuxhint.com/golang-make-function/ for a brief discussion on how to use make to create a channel
+		// for to connect concurrent goroutines
 		done := make(chan bool)
 		go func() {
 			for {
@@ -121,4 +112,12 @@ func loadTLSCfg() *tls.Config {
 		RootCAs:            cp,
 	}
 	return config
+}
+
+func clientMemberCreate(client memberGrpc.MemberServiceClient, ctx context.Context, name string, email string) (*memberGrpc.Member, error) {
+	log.Printf("client/main/clientMemberCreate: called")
+	member, error := client.Create(ctx, &memberGrpc.NewMember{First: name, Email: email})
+	log.Printf("client/main/clientMemberCreate: back from server")
+	log.Printf(error.Error())
+	return member, error
 }

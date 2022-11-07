@@ -25,3 +25,5 @@ func (cm Member) First() string {
 func (cm Member) Email() string {
 	return cm.email
 }
+
+func (cm Member) Empty() {}

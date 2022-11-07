@@ -11,4 +11,6 @@ type MemberRepository interface {
 	ReadById(id string) (*model.Member, error)
 	// Create member with
 	Create(*model.Member) (*model.Member, error)
+	// Empty all elements
+	Empty()
 }
