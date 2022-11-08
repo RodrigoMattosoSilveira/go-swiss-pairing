@@ -15,6 +15,13 @@ import (
 	"google.golang.org/grpc/credentials"
 )
 
+/*
+ Usage: ./app/client/main --op ping
+         ./app/client/main --op create --name <<name>>   --email <<email>>
+		 ./app/client/main --op read
+		 ./app/client/main --op readEmail --email <<email>>
+		 ./app/client/main --op readId --id <<id>>
+*/
 func main() {
 	var op, id, name, email string
 	flag.StringVar(&op, "op", "ping", "the operation we want to execute")
