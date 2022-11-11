@@ -2,12 +2,12 @@ package main
 
 import (
 	"flag"
-	"github.com/RodrigoMattosoSilveira/go-swiss-pairing/app/constants"
-	"github.com/RodrigoMattosoSilveira/go-swiss-pairing/app/domain/service"
-	repo "github.com/RodrigoMattosoSilveira/go-swiss-pairing/app/interface/persistence/memory"
-	memberGrpc "github.com/RodrigoMattosoSilveira/go-swiss-pairing/app/interface/rpc/proto"
-	pb "github.com/RodrigoMattosoSilveira/go-swiss-pairing/app/interface/rpc/server"
-	uc "github.com/RodrigoMattosoSilveira/go-swiss-pairing/app/usecase"
+	"github.com/RodrigoMattosoSilveira/go-swiss-pairing/server/constants"
+	"github.com/RodrigoMattosoSilveira/go-swiss-pairing/server/domain/service"
+	repo "github.com/RodrigoMattosoSilveira/go-swiss-pairing/server/interface/persistence/memory"
+	memberGrpc "github.com/RodrigoMattosoSilveira/go-swiss-pairing/server/interface/rpc/proto"
+	pb "github.com/RodrigoMattosoSilveira/go-swiss-pairing/server/interface/rpc/server"
+	uc "github.com/RodrigoMattosoSilveira/go-swiss-pairing/server/usecase"
 	"github.com/improbable-eng/grpc-web/go/grpcweb"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/credentials"

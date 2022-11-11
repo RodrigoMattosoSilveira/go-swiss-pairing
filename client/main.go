@@ -9,18 +9,18 @@ import (
 	"io/ioutil"
 	"log"
 
-	"github.com/RodrigoMattosoSilveira/go-swiss-pairing/app/constants"
-	memberGrpc "github.com/RodrigoMattosoSilveira/go-swiss-pairing/app/interface/rpc/proto"
+	"github.com/RodrigoMattosoSilveira/go-swiss-pairing/server/constants"
+	memberGrpc "github.com/RodrigoMattosoSilveira/go-swiss-pairing/server/interface/rpc/proto"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/credentials"
 )
 
 /*
- Usage: ./app/client/main --op ping
-         ./app/client/main --op create --name <<name>>   --email <<email>>
-		 ./app/client/main --op read
-		 ./app/client/main --op readEmail --email <<email>>
-		 ./app/client/main --op readId --id <<id>>
+ Usage: ./server/client/main --op ping
+         ./server/client/main --op create --name <<name>>   --email <<email>>
+		 ./server/client/main --op read
+		 ./server/client/main --op readEmail --email <<email>>
+		 ./server/client/main --op readId --id <<id>>
 */
 func main() {
 	var op, id, name, email string

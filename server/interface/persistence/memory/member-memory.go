@@ -3,7 +3,7 @@ package memory
 import (
 	"errors"
 	"fmt"
-	"github.com/RodrigoMattosoSilveira/go-swiss-pairing/app/domain/model"
+	"github.com/RodrigoMattosoSilveira/go-swiss-pairing/server/domain/model"
 	"sync"
 )
 

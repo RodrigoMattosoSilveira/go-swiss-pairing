@@ -1,6 +1,6 @@
 package repository
 
-import "github.com/RodrigoMattosoSilveira/go-swiss-pairing/app/domain/model"
+import "github.com/RodrigoMattosoSilveira/go-swiss-pairing/server/domain/model"
 
 type MemberRepository interface {
 	// Read find all members
