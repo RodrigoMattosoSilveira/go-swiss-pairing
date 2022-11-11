@@ -61,7 +61,7 @@ func main() {
 	// We need a http router
 	r := http.NewServeMux()
 	// Load the static webpage with a http fileserver
-	webapp := http.FileServer(http.Dir("ui"))
+	webapp := http.FileServer(http.Dir("./dist/ux"))
 	// Host the Web Application at /, and wrap it in the GRPC Multiplexer
 	// This allows grpc requests to transfer over HTTP1. then be  routed by the multiplexer
 	r.Handle("/", multiplex.Handler(webapp))
