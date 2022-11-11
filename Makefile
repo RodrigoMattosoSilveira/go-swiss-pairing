@@ -43,7 +43,8 @@ GO_CLIENT = $(GO_DIR)/client/main
 		clean_cert \
 		clean_grpc \
 		run_server \
-		run_client
+		run_client \
+		test_server
 
 # Install dependencies
 setup:
@@ -105,7 +106,8 @@ clean_cert:
 clean: clean_cert clean_grpc
 
 # Test targets
-# TBD server, client, ui, all
+test_server:
+	ginkgo ./app/...
 
 # Install targets
 # TBD install, uninstall
