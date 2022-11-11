@@ -31,7 +31,7 @@ GO_CLIENT = $(GO_DIR)/client/main
 GO_FILES=$(shell find $(GO_DIR) -type f \( -name "*.go" -o -name "*.go" \))
 
 # GO client Files
-GO_CLIENT = $(GO_DIR)/client/main
+GO_CLIENT = ./client/main
 
 # GO UI Files
 # Not yet
