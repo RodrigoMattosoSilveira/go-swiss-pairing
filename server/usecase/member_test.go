@@ -2,10 +2,10 @@ package usecase_test
 
 import (
 	"fmt"
-	"github.com/RodrigoMattosoSilveira/go-swiss-pairing/app/constants"
-	"github.com/RodrigoMattosoSilveira/go-swiss-pairing/app/domain/service"
-	repo "github.com/RodrigoMattosoSilveira/go-swiss-pairing/app/interface/persistence/memory"
-	uc "github.com/RodrigoMattosoSilveira/go-swiss-pairing/app/usecase"
+	"github.com/RodrigoMattosoSilveira/go-swiss-pairing/server/constants"
+	"github.com/RodrigoMattosoSilveira/go-swiss-pairing/server/domain/service"
+	repo "github.com/RodrigoMattosoSilveira/go-swiss-pairing/server/interface/persistence/memory"
+	uc "github.com/RodrigoMattosoSilveira/go-swiss-pairing/server/usecase"
 	. "github.com/onsi/ginkgo/v2"
 	. "github.com/onsi/gomega"
 	"google.golang.org/grpc/status"

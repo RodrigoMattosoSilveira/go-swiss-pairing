@@ -19,6 +19,14 @@ A tool for tournament directors to organize tournaments using the Swiss pairing 
 * [ ] Replace the original simple react-grpc-go UI page with a simple nexjs-ts-materio-template component
 * [ ] Design the landing page, the members page, including logic to CRUD members
 
+# Add Members UI
+* I had to run `yarn add create-react-app@latest` to then be able to run  `npx create-react-app swiss-pairing`
+* [Small Go/React/Typescript gRPC-Web example](https://github.com/johanbrandhorst/grpc-web-go-react-example)- Interesting, but not based on the `improbable` `grpc-web` technology;
+* [buf](https://docs.buf.build/introduction) A tool to facilitate PROTOBUF management; I'll only use the generation and dependencies features for now;
+  * requires [./JQ](https://stedolan.github.io/jq/) 
+* [Use gRPC with Node.js and Typescript](https://dev.to/devaddict/use-grpc-with-node-js-and-typescript-3c58) Does not show React
+* [Small Go/React/TypeScript gRPC-Web example](https://github.com/johanbrandhorst/grpc-web-go-react-example)
+
 # Links and References
 * Link to the [Recursive Wildcard Function](https://blog.jgc.org/2011/07/gnu-make-recursive-wildcard-function.html) I used to build a list of dependencies
 * [Using gRPC with TLS, Golang and React (No Envoy)](https://itnext.io/using-grpc-with-tls-golang-and-react-no-envoy-92e898bf8463)

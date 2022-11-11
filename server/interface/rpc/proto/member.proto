@@ -1,6 +1,6 @@
 syntax = "proto3";
 package proto;
-option go_package = "go-swiss-pairing/app/interface/rpc/proto/member.proto" ;
+option go_package = "go-swiss-pairing/server/interface/rpc/proto/member.proto" ;
 service MemberService {
     rpc Create(NewMember) returns (Member) {}
     rpc Read(MemberEmpty) returns (stream Member) {}

@@ -1,7 +1,7 @@
 package service
 
 import (
-	"github.com/RodrigoMattosoSilveira/go-swiss-pairing/app/domain/repository"
+	"github.com/RodrigoMattosoSilveira/go-swiss-pairing/server/domain/repository"
 )
 
 type MemberService struct {

@@ -1,10 +1,10 @@
 package usecase
 
 import (
-	"github.com/RodrigoMattosoSilveira/go-swiss-pairing/app/constants"
-	"github.com/RodrigoMattosoSilveira/go-swiss-pairing/app/domain/model"
-	"github.com/RodrigoMattosoSilveira/go-swiss-pairing/app/domain/repository"
-	"github.com/RodrigoMattosoSilveira/go-swiss-pairing/app/domain/service"
+	"github.com/RodrigoMattosoSilveira/go-swiss-pairing/server/constants"
+	"github.com/RodrigoMattosoSilveira/go-swiss-pairing/server/domain/model"
+	"github.com/RodrigoMattosoSilveira/go-swiss-pairing/server/domain/repository"
+	"github.com/RodrigoMattosoSilveira/go-swiss-pairing/server/domain/service"
 	"github.com/google/uuid"
 	"google.golang.org/grpc/status"
 	"log"

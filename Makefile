@@ -24,14 +24,20 @@ PROTO_FILES = $(wildcard $(PROTO_DIR)/*.proto)
 PB_GO_FILES = $(PROTO_FILES:.proto=.pb.go)
 all_pb_go_files: $(PB_GO_FILES)
 
-# GO Server Files
-GO_DIR = ./app
-GO_SERVER = $(GO_DIR)/server/main
-GO_CLIENT = $(GO_DIR)/client/main
-GO_FILES=$(shell find $(GO_DIR) -type f \( -name "*.go" -o -name "*.go" \))
+# Server
+EXEC_DIR = ./dist
+SERVER_SRC_DIR = ./server
+SERVER_SRC_MAIN = $(SERVER_SRC_DIR)/main.go
+SERVER_EXEC_DIR = $(EXEC_DIR)/server
+SERVER_EXEC_MAIN = $(SERVER_EXEC_DIR)/main
+SERVER_FILES=$(shell find $(SERVER_SRC_DIR) -type f \( -name "*.go" -o -name "*.go" \))
 
 # GO client Files
-GO_CLIENT = $(GO_DIR)/client/main
+CLIENT_SRC_DIR = ./client
+CLIENT_SRC_MAIN = $(CLIENT_SRC_DIR)/main.go
+CLIENT_EXEC_DIR = $(EXEC_DIR)/client
+CLIENT_EXEC_MAIN = $(CLIENT_EXEC_DIR)/main
+CLIENT_FILES=$(shell find $(CLIENT_SRC_DIR) -type f \( -name "*.go" -o -name "*.go" \))
 
 # GO UI Files
 # Not yet
@@ -42,6 +48,7 @@ GO_CLIENT = $(GO_DIR)/client/main
 		clean \
 		clean_cert \
 		clean_grpc \
+		clean_dist \
 		run_server \
 		run_client \
 		test_server
@@ -73,26 +80,26 @@ $(PB_GO_FILES): %.pb.go: %.proto
 		$<
 
 # Build Server
-$(GO_SERVER): $(GO_FILES) $(CERT_SERVER_PEM)
-	go build -o $(GO_SERVER) $(GO_SERVER).go
+$(SERVER_EXEC_MAIN): $(SERVER_FILES) $(CERT_SERVER_PEM)
+	go build -o $(SERVER_EXEC_MAIN) $(SERVER_SRC_MAIN)
 
 # Build Client
-$(GO_CLIENT): $(GO_FILES) $(CERT_SERVER_PEM)
-	go build -o $(GO_CLIENT) $(GO_CLIENT).go
+$(CLIENT_EXEC_MAIN): $(CLIENT_FILES) $(CERT_SERVER_PEM)
+	go build -o $(CLIENT_EXEC_MAIN) $(CLIENT_SRC_MAIN)
 
 # Build UI
 # not yet
 
 # Build all files
-build: $(CERT_SERVER_PEM) $(PB_GO_FILES) $(GO_SERVER) $(GO_CLIENT)
+build: $(CERT_SERVER_PEM) $(PB_GO_FILES) $(SERVER_EXEC_MAIN) $(CLIENT_EXEC_MAIN)
 
 # Run the server
 run_server:
-	$(GO_SERVER)
+	$(SERVER_EXEC_MAIN)
 
 # Run the client
 run_client:
-	$(GO_CLIENT)
+	$(CLIENT_EXEC_MAIN)
 
 # Clean the generated gRPC files
 clean_grpc:
@@ -102,12 +109,17 @@ clean_grpc:
 clean_cert:
 	rm $(GENERATED_CERT_FILES)
 
+# Clean the generated certificates
+clean_dist:
+	rm $(SERVER_EXEC_MAIN)
+	rm $(CLIENT_EXEC_MAIN)
+
 # Clean all generated files
 clean: clean_cert clean_grpc
 
 # Test targets
 test_server:
-	ginkgo ./app/...
+	ginkgo $(SERVER_SRC_DIR)/...
 
 # Install targets
 # TBD install, uninstall

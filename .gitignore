@@ -22,3 +22,6 @@ ca-key.pem
 server-cert.pem
 server-key.pem
 server-req.pem
+node_modules
+ui/node_modules
+ui/.next
