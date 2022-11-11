@@ -53,8 +53,7 @@ func main() {
 	}()
 	// Wrap the GRPC Server in grpc-web and also host the UI
 	grpcWebServer := grpcweb.WrapServer(grpcServer)
-	// Lets put the wrapped grpc server in our multiplexer struct so
-	// it can reach the grpc server in its handler
+	// Let's put the wrapped grpc server in our multiplexer struct so it can reach the grpc server in its handler
 	multiplex := grpcMultiplexer{
 		grpcWebServer,
 	}
@@ -62,10 +61,9 @@ func main() {
 	// We need a http router
 	r := http.NewServeMux()
 	// Load the static webpage with a http fileserver
-	webapp := http.FileServer(http.Dir("ui/pingpongapp/build"))
+	webapp := http.FileServer(http.Dir("ui"))
 	// Host the Web Application at /, and wrap it in the GRPC Multiplexer
-	// This allows grpc requests to transfer over HTTP1. then be
-	// routed by the multiplexer
+	// This allows grpc requests to transfer over HTTP1. then be  routed by the multiplexer
 	r.Handle("/", multiplex.Handler(webapp))
 	// Create a HTTP server and bind the router to it, and set wanted address
 	srv := &http.Server{
@@ -77,7 +75,6 @@ func main() {
 	// Serve the webapp over TLS
 	log.Printf("Starting server on localhost:8080")
 	log.Fatal(srv.ListenAndServeTLS(constants.ServerCertPem, constants.ServerKeyPem))
-
 }
 
 // GenerateTLSApi will load TLS certificates and key and create a grpc server with those.
