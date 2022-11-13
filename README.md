@@ -26,6 +26,7 @@ A tool for tournament directors to organize tournaments using the Swiss pairing 
   * requires [./JQ](https://stedolan.github.io/jq/) 
 * [Use gRPC with Node.js and Typescript](https://dev.to/devaddict/use-grpc-with-node-js-and-typescript-3c58) Does not show React
 * [Small Go/React/TypeScript gRPC-Web example](https://github.com/johanbrandhorst/grpc-web-go-react-example)
+* [buf](https://docs.buf.build/introduction) Integrated it, makes it easier to handle grpc
 
 # Links and References
 * Link to the [Recursive Wildcard Function](https://blog.jgc.org/2011/07/gnu-make-recursive-wildcard-function.html) I used to build a list of dependencies

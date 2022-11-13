@@ -4,7 +4,7 @@ import (
 	"context"
 	"errors"
 	"fmt"
-	cm "github.com/RodrigoMattosoSilveira/go-swiss-pairing/server/interface/rpc/proto"
+	cm "github.com/RodrigoMattosoSilveira/go-swiss-pairing/grpc/server/interface/rpc/proto/swiss-pairing-apis/member/v1"
 	"github.com/RodrigoMattosoSilveira/go-swiss-pairing/server/usecase"
 	"sync"
 )

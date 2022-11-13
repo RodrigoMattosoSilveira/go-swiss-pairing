@@ -10,19 +10,11 @@ CERT_SERVER_PEM=$(CERT_DIR)/server-cert.pem
 GENERATED_CERT_FILES=$(shell find $(CERT_DIR) -type f \( -name "*.pem" -o -name "*.srl" \))
 
 # gRPC variables
-PB_VER = 21.4
-PB_URL =  https://github.com/protocolbuffers/protobuf/releases/download/v${PB_VER}
-PB_PREFIX =  protoc
-PB_FN  = osx-x86_64.zip
-PB_OSX = ${PB_PREFIX}-${PB_VER}-${PB_FN}
-GRPC_DIR=./app/interface/rpc
-GENERATED_GRPC_FILES=$(shell find $(GRPC_DIR) -type f \( -name "*.pb.go" -o -name "*.js" \))
-
 # gRPC variables
-PROTO_DIR = ./app/interface/rpc/proto
-PROTO_FILES = $(wildcard $(PROTO_DIR)/*.proto)
-PB_GO_FILES = $(PROTO_FILES:.proto=.pb.go)
-all_pb_go_files: $(PB_GO_FILES)
+PROTO_DIR=./server/interface/rpc/proto
+PROTO_FILES=$(shell find ./server/interface/rpc/proto -type f -name "*.proto")
+GRPC_DIR=./grpc
+PB_GO_FILES=$(shell find $(GRPC_DIR) -type f -name "*_grpc.pb.go")
 
 # Server
 EXEC_DIR = ./dist
@@ -44,6 +36,7 @@ CLIENT_FILES=$(shell find $(CLIENT_SRC_DIR) -type f \( -name "*.go" -o -name "*.
 
 # Keep all PHONY tasks definitions together
 .PHONY: setup \
+		gen_grpc \
 		build \
 		clean \
 		clean_cert \
@@ -69,22 +62,17 @@ setup:
 $(CERT_SERVER_PEM) : $(CERT_SCRIPT) $(CERT_CONF)
 	$(CERT_SCRIPT)
 
-# Build the GO and JS files to support gRPC operations, in the same folder as their proto files
-$(PB_GO_FILES): %.pb.go: %.proto
-	protoc --js\_out=import\_style=commonjs,binary:./ \
-		--grpc-web\_out=import\_style=commonjs,mode=grpcwebtext:./ \
-		--go_out=./ \
-		--go_opt=paths=source_relative \
-		--go-grpc_out=require_unimplemented_servers=false:. \
-		--go-grpc_opt=paths=source_relative \
-		$<
+## Generate the gRPC files
+$(PB_GO_FILES): $(PROTO_FILES)
+	buf generate --template ./server/interface/rpc/buf.gen.yamlmrs
+
 
 # Build Server
-$(SERVER_EXEC_MAIN): $(SERVER_FILES) $(CERT_SERVER_PEM)
+$(SERVER_EXEC_MAIN): $(SERVER_FILES) $(CERT_SERVER_PEM) $(PB_GO_FILES)
 	go build -o $(SERVER_EXEC_MAIN) $(SERVER_SRC_MAIN)
 
 # Build Client
-$(CLIENT_EXEC_MAIN): $(CLIENT_FILES) $(CERT_SERVER_PEM)
+$(CLIENT_EXEC_MAIN): $(CLIENT_FILES) $(CERT_SERVER_PEM) $(PB_GO_FILES)
 	go build -o $(CLIENT_EXEC_MAIN) $(CLIENT_SRC_MAIN)
 
 # Build UI
