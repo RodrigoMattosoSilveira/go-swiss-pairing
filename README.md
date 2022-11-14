@@ -34,3 +34,6 @@ A tool for tournament directors to organize tournaments using the Swiss pairing 
 * [How to Set Up gRPC Server-Side Streaming with Go](https://www.freecodecamp.org/news/grpc-server-side-streaming-with-go/)
 * [ginkgo](https://onsi.github.io/ginkgo/) - GOLANG test package that makes it similar to JASMINE and the like
 * [GOLANG Custom Errors](https://golangbot.com/custom-errors/)
+* [babel](https://babeljs.io/docs/en/)
+* [mini.css](https://minicss.us/docs.htm)
+* [react hands on tutorial](https://handsonreact.com/docs/props#!)
