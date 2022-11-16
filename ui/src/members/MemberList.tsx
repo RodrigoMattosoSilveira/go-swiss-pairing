@@ -18,6 +18,7 @@ function MemberList({ members }: MemberListProps) {
                         <th>First</th>
                         <th>Email</th>
                         <th>Active</th>
+                        <th>Edit</th>
                     </tr>
                 </thead>
                 <tbody>
