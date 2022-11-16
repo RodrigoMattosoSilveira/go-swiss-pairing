@@ -1,5 +1,6 @@
 import React from 'react';
 import { Member } from './Member';
+import MemberRow from "./MemberRow";
 import {MOCK_MEMBERS} from "./MOCK_MEMBERS";
 
 interface MemberListProps {
@@ -21,12 +22,7 @@ function MemberList({ members }: MemberListProps) {
                 </thead>
                 <tbody>
                     {members.map((member) => (
-                        <tr>
-                            <td data-label="ID">{member.id}</td>
-                            <td data-label="First">{member.first}</td>
-                            <td data-label="Email">{member.email}</td>
-                            <td data-label="Active">{member.isActive ? "Yes" : "No"}</td>
-                        </tr>
+                        <MemberRow member={member}></MemberRow>
                     ))}
                 </tbody>
             </table>
