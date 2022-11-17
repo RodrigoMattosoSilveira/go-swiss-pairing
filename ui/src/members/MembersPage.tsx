@@ -1,6 +1,7 @@
 import React from 'react';
 import {MOCK_MEMBERS} from "./MOCK_MEMBERS";
 import MemberList from "./MemberList";
+import MemberListTable from "./MemberListTable";
 
 function ProjectsPage() {
     return (
@@ -8,6 +9,7 @@ function ProjectsPage() {
             <h1>Projects</h1>
             {/*<pre>{JSON.stringify(MOCK_MEMBERS, null, ' ')}</pre>*/}
             <MemberList members={MOCK_MEMBERS} />
+            {/*<MemberListTable members={MOCK_MEMBERS} />*/}
         </>
         );
 }
