@@ -1,5 +1,6 @@
 import { Member } from './Member';
 import React from 'react';
+import MemberFormModal from "./MemberFormModal";
 
 interface ProjectCardProps {
     member: Member;
@@ -12,7 +13,7 @@ function MemberCard(props: ProjectCardProps) {
     };
 
     return (
-        <tr key={member.id}>
+        <>
             <td data-label="ID">{member.id}</td>
             <td data-label="Name">{member.first + " " + member.last}</td>
             <td data-label="Email">{member.email}</td>
@@ -27,9 +28,9 @@ function MemberCard(props: ProjectCardProps) {
                     <span className="icon-edit "></span>
                     Edit
                 </button>
-
+                {/*<MemberFormModal member={member}/>*/}
             </td>
-        </tr>
+        </>
     );
 }
 

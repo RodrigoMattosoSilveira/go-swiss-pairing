@@ -1,6 +1,7 @@
 import React from 'react';
 import { Member } from './Member';
 import MemberCard from "./MemberCard";
+import MemberForm from "./MemberForm";
 
 interface ProjectListProps {
     members: Member[];
@@ -13,6 +14,7 @@ function ProjectList({ members }: ProjectListProps) {
             {members.map((member) => (
             <div key={member.id} className="cols-sm">
                 <MemberCard member={member}></MemberCard>
+                <MemberForm/>
             </div>
             ))}
         </div>

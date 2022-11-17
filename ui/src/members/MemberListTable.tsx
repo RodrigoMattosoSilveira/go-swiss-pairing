@@ -41,7 +41,9 @@ function ProjectList({ members }: ProjectListProps) {
             </thead>
             <tbody>
                 {members.map((member) => (
-                    <MemberListTableRow member={member}></MemberListTableRow>
+                    <tr key={member.id}>
+                        <MemberListTableRow member={member}></MemberListTableRow>
+                    </tr>
                 ))}
             </tbody>
         </table>
