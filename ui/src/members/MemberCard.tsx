@@ -7,6 +7,9 @@ interface ProjectCardProps {
 
 function MemberCard(props: ProjectCardProps) {
     const { member: member } = props;
+    const handleEditClick = (memberBeingEdited: Member) => {
+          console.log(memberBeingEdited);
+    };
     return (
         <div className="card">
             <img src={"assets/" + member.imageUrl} alt={member.first + " " + member.last} />
@@ -17,6 +20,13 @@ function MemberCard(props: ProjectCardProps) {
                 <p>Cell: {member.cell}</p>
                 <p>Email {member.email}</p>
                 <p>Rating : {member.rating.toLocaleString()}</p>
+                <button
+                    className="bordered"
+                    onClick={() => handleEditClick((member))}
+                >
+                    <span className="icon-edit "></span>
+                    Edit
+                </button>
             </section>
         </div>
     );

@@ -6,10 +6,10 @@ import MemberListTable from "./MemberListTable";
 function ProjectsPage() {
     return (
         <>
-            <h1>Projects</h1>
+            <h1>Members</h1>
             {/*<pre>{JSON.stringify(MOCK_MEMBERS, null, ' ')}</pre>*/}
-            <MemberList members={MOCK_MEMBERS} />
-            {/*<MemberListTable members={MOCK_MEMBERS} />*/}
+            {/*<MemberList members={MOCK_MEMBERS} />*/}
+            <MemberListTable members={MOCK_MEMBERS} />
         </>
         );
 }

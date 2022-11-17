@@ -27,7 +27,7 @@ function ProjectList({ members }: ProjectListProps) {
          //       ))}
          //     </div>
         <table className="hoverable">
-            <caption>Members</caption>
+            {/*<caption>Members</caption>*/}
             <thead>
                 <tr>
                     <th>ID</th>
@@ -36,6 +36,7 @@ function ProjectList({ members }: ProjectListProps) {
                     <th>Cell</th>
                     <th>Rating</th>
                     <th>Active</th>
+                    <th>Edit</th>
                 </tr>
             </thead>
             <tbody>
