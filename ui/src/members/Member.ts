@@ -7,6 +7,7 @@ export class Member {
     cell: string = '';
     rating: number = 1200;
     isActive: boolean = false
+    imageUrl: string = 'picture_placeholder.jpeg';
 
     constructor(initializer?: any) {
         if (!initializer) return;
@@ -18,5 +19,6 @@ export class Member {
         if (initializer.cell) this.cell = initializer.cell;
         if (initializer.rating) this.rating = initializer.rating;
         if (initializer.isActive) this.isActive = initializer.isActive;
+        if (initializer.imageUrl) this.imageUrl = initializer.imageUrl;
     }
 }
