@@ -2,11 +2,11 @@ import React from 'react';
 import { Member } from './Member';
 import MemberListTableRow from "./MemberListTableRow";
 
-interface ProjectListProps {
+interface MemberListTableProps {
     members: Member[];
 }
 
-function MemberListTable({ members }: ProjectListProps) {
+function MemberListTable({ members }: MemberListTableProps) {
     // return <pre>{JSON.stringify(members, null, ' ')}</pre>;
    return (
          // <div className="row">

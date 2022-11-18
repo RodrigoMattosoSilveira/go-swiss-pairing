@@ -2,11 +2,11 @@ import { Member } from './Member';
 import React from 'react';
 import MemberFormModal from "./MemberFormModal";
 
-interface ProjectCardProps {
+interface MemberListTableRowProps {
     member: Member;
 }
 
-function MemberListTableRow(props: ProjectCardProps) {
+function MemberListTableRow(props: MemberListTableRowProps) {
     const { member: member } = props;
     const handleEditClick = (memberBeingEdited: Member) => {
         console.log(memberBeingEdited);
