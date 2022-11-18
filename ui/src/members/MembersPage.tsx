@@ -3,7 +3,7 @@ import {MOCK_MEMBERS} from "./MOCK_MEMBERS";
 import MemberList from "./MemberList";
 import MemberListTable from "./MemberListTable";
 
-function ProjectsPage() {
+function MembersPage() {
     return (
         <>
             <h1>Members</h1>
@@ -14,4 +14,4 @@ function ProjectsPage() {
         );
 }
 
-export default ProjectsPage;
+export default MembersPage;
