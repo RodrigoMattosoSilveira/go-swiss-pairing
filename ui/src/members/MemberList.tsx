@@ -8,12 +8,15 @@ interface ProjectListProps {
 }
 
 function ProjectList({ members }: ProjectListProps) {
+    const handleEdit = (member: Member) => {
+        console.log(member);
+    }
     // return <pre>{JSON.stringify(members, null, ' ')}</pre>;
    return (
         <div className="row">
             {members.map((member) => (
             <div key={member.id} className="cols-sm">
-                <MemberCard member={member}></MemberCard>
+                <MemberCard member={member} onEdit={handleEdit}></MemberCard>
                 <MemberForm/>
             </div>
             ))}

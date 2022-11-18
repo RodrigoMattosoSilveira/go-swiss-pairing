@@ -1,14 +1,16 @@
 import { Member } from './Member';
 import React from 'react';
 
-interface ProjectCardProps {
+interface MemberCardProps {
     member: Member;
+    onEdit: (member: Member) => void
 }
 
-function MemberCard(props: ProjectCardProps) {
-    const { member: member } = props;
+function MemberCard(props: MemberCardProps) {
+    const { member: member, onEdit } = props;
     const handleEditClick = (memberBeingEdited: Member) => {
-          console.log(memberBeingEdited);
+        // console.log(memberBeingEdited);
+        onEdit(memberBeingEdited)
     };
     return (
         <div className="card">
