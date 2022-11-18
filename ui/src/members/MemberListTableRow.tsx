@@ -6,7 +6,7 @@ interface ProjectCardProps {
     member: Member;
 }
 
-function MemberCard(props: ProjectCardProps) {
+function MemberListTableRow(props: ProjectCardProps) {
     const { member: member } = props;
     const handleEditClick = (memberBeingEdited: Member) => {
         console.log(memberBeingEdited);
@@ -34,4 +34,4 @@ function MemberCard(props: ProjectCardProps) {
     );
 }
 
-export default MemberCard;
+export default MemberListTableRow;

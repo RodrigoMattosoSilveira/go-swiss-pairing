@@ -6,7 +6,7 @@ interface ProjectListProps {
     members: Member[];
 }
 
-function ProjectList({ members }: ProjectListProps) {
+function MemberListTable({ members }: ProjectListProps) {
     // return <pre>{JSON.stringify(members, null, ' ')}</pre>;
    return (
          // <div className="row">
@@ -50,4 +50,4 @@ function ProjectList({ members }: ProjectListProps) {
    );
 }
 
-export default ProjectList;
+export default MemberListTable;
