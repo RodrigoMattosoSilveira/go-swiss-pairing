@@ -1,34 +1,38 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import { Member } from './Member';
-import MemberCard from "./MemberCard";
-import MemberForm from "./MemberForm";
+import MemberListRow from './MemberListRow';
+import MemberForm from './MemberForm';
+import MemberListRowHeader from './MemberListRowHeader';
 
-interface ProjectListProps {
+interface MemberListProps {
     members: Member[];
+    onSave: (member: Member) => void;
 }
 
-function ProjectList({ members }: ProjectListProps) {
-    const [memberBeingEdited, setMemeberBeingEdited] = useState({});
+function MemberList(props: MemberListProps) {
+    const { members, onSave } = props;
+    const [memberBeingEdited, setMemberBeingEdited] = useState({});
     const handleEdit = (member: Member) => {
         // console.log(member);
-        setMemeberBeingEdited(member)
-    }
-    // return <pre>{JSON.stringify(members, null, ' ')}</pre>;
-   return (
-        <div className="row">
+        setMemberBeingEdited(member);
+    };
+    const cancelEditing = () => {
+        setMemberBeingEdited({});
+    };
+    return (
+        <div className="container">
+            <div className="row"><MemberListRowHeader /></div>
             {members.map((member) => (
-            <div key={member.id} className="cols-sm">
-                {/*<MemberCard member={member} onEdit={handleEdit}></MemberCard>*/}
-                {/*<MemberForm/>*/}
-               {member === memberBeingEdited ? (
-                 <MemberForm />
-               ) : (
-                 <MemberCard member={member} onEdit={handleEdit} />
-               )}
-            </div>
+                <div className="row" key={member.id}>
+                    {member === memberBeingEdited ? (
+                        <MemberForm member={member} onSave={onSave} onCancel={cancelEditing}/>
+                    ) : (
+                        <MemberListRow member={member} onEdit={handleEdit}/>
+                    )}
+                </div>
             ))}
         </div>
-   );
+    );
 }
 
-export default ProjectList;
+export default MemberList;
