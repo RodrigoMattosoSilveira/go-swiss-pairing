@@ -9,9 +9,17 @@ interface MemberFormProps {
 function MemberForm({member: initialMember, onSave, onCancel}: MemberFormProps) {
     // const {member: initialMember, onSave, onCancel} = props;
     const [member, setMember] = useState(initialMember);
+    const [errors, setErrors] = useState({
+        first: '',
+        last: '',
+        email: '',
+        cell: '',
+        rating: ''
+    });
     const handleSubmit = (event: SyntheticEvent) => {
         console.log("handling submit")
         event.preventDefault();
+        if (!isValid()) return;
         onSave(member);
     };
     const handleChange = (event: any) => {
@@ -38,7 +46,47 @@ function MemberForm({member: initialMember, onSave, onCancel}: MemberFormProps) 
             updatedMember = new Member({ ...p, ...change });
             return updatedMember;
         });
+        setErrors(() => validate(updatedMember));
     };
+    function validate(member: Member) {
+        let errors: any = { first: '', last: '', email: '', cell: '', rating: '' };
+        if (member.first.length === 0) {
+            errors.first = 'First name is required';
+        }
+        if (member.first.length > 0 && member.first.length < 3) {
+            errors.first = 'First name needs to be at least 3 characters.';
+        }
+
+        if (member.last.length === 0) {
+            errors.last = 'Last last is required';
+        }
+        if (member.last.length > 0 && member.last.length < 3) {
+            errors.last = 'Last name needs to be at least 3 characters.';
+        }
+
+        if (member.email.length === 0) {
+            errors.email = 'Email is required';
+        }
+
+        if (member.cell.length === 0) {
+            errors.cell = 'Cell number is required';
+        }
+
+        if (member.rating === 0 || member.rating > 3000) {
+            errors.rating = 'Member rating must be between 0 and 3000';
+        }
+
+        return errors;
+    }
+    function isValid() {
+      return (
+        errors.first.length === 0 &&
+        errors.last.length === 0 &&
+        errors.email.length === 0 &&
+        errors.cell.length === 0 &&
+        errors.rating.length === 0
+      );
+    }
     return (
         <form className="input-group vertical"
               onSubmit={handleSubmit}
@@ -51,6 +99,11 @@ function MemberForm({member: initialMember, onSave, onCancel}: MemberFormProps) 
                 value={member.first}
                 onChange={handleChange}
             />
+            {errors.first.length > 0 && (
+                <div className="card error">
+                    <p>{errors.first}</p>
+                </div>
+           )}
 
             <label htmlFor="last">First Name</label>
             <input
@@ -60,6 +113,11 @@ function MemberForm({member: initialMember, onSave, onCancel}: MemberFormProps) 
                 value={member.last}
                 onChange={handleChange}
             />
+            {errors.last.length > 0 && (
+                <div className="card error">
+                    <p>{errors.last}</p>
+                </div>
+            )}
 
             <label htmlFor="email">Email</label>
             <input
@@ -69,6 +127,11 @@ function MemberForm({member: initialMember, onSave, onCancel}: MemberFormProps) 
                 value={member.email}
                 onChange={handleChange}
             />
+            {errors.email.length > 0 && (
+                <div className="card error">
+                    <p>{errors.email}</p>
+                </div>
+            )}
 
             <label htmlFor="cell">Cell</label>
             <input
@@ -78,6 +141,11 @@ function MemberForm({member: initialMember, onSave, onCancel}: MemberFormProps) 
                 value={member.cell}
                 onChange={handleChange}
             />
+            {errors.cell.length > 0 && (
+                <div className="card error">
+                    <p>{errors.cell}</p>
+                </div>
+            )}
 
             <label htmlFor="rating">Rating</label>
             <input
@@ -87,6 +155,11 @@ function MemberForm({member: initialMember, onSave, onCancel}: MemberFormProps) 
                 value={member.rating}
                 onChange={handleChange}
             />
+            {errors.rating.length > 0 && (
+                <div className="card error">
+                    <p>{errors.rating}</p>
+                </div>
+            )}
 
             <label htmlFor="isActive">Active</label>
             <input
