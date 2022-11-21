@@ -63,6 +63,23 @@ const memberAPI = {
                 );
             });
     },
+    put(member: Member) {
+      return fetch(`${url}/${member.id}`, {
+            method: 'PUT',
+            body: JSON.stringify(member),
+            headers: {
+              'Content-Type': 'application/json'
+            }
+      })
+        .then(checkStatus)
+        .then(parseJSON)
+        .catch((error: TypeError) => {
+              console.log('log client error ' + error);
+              throw new Error(
+                    'There was an error updating the member. Please try again.'
+                  );
+            });
+    },
 };
 
 export { memberAPI };

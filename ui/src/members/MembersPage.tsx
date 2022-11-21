@@ -9,10 +9,10 @@ function MembersPage() {
     const [members, setMembers] = useState<Member[]>([]);
     const [currentPage, setCurrentPage] = useState(1);
     useEffect(() => {
-        async function loadProjects() {
+        async function loadMembers() {
             setMembers([]);
-            setLoading(true);
             try {
+                setLoading(true);
                 const data = await memberAPI.get(currentPage);
                 setError('');
                 setMembers(data);
@@ -30,14 +30,28 @@ function MembersPage() {
                 setLoading(false);
             }
         }
-        loadProjects();
+        loadMembers();
     }, [currentPage]);
     const saveMember = (member: Member) => {
-        // console.log('Saving project: ', member);
-        let updatedMembers = members.map((m: Member) => {
-            return m.id === member.id ? member : m;
-        });
-        setMembers(updatedMembers);
+        // console.log('Saving member: ', member);
+        // let updatedMembers = members.map((m: Member) => {
+        //     return m.id === member.id ? member : m;
+        // });
+        // setMembers(updatedMembers);
+        memberAPI
+          .put(member)
+          .then((updatedMember) => {
+                let updatedMembers = members.map((p: Member) => {
+                      return p.id === member.id ? new Member(updatedMember) : p;
+                    });
+                setMembers(updatedMembers);
+              })
+          .catch((e) => {
+                 if (e instanceof Error) {
+                      setError(e.message);
+                     }
+              });
+        
     };
     const handleMoreClick = () => {
         setCurrentPage((currentPage) => currentPage + 1);
