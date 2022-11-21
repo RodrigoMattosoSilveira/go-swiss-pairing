@@ -1,58 +1,18 @@
-import React, { Fragment, useState, useEffect } from 'react';
+import React from 'react';
+import { useMembers } from './MemberHooks';
 import MemberList from "../../src/members/MemberList"
-import { Member } from "./Member"
-import { memberAPI } from "./memberAPI";
 
 function MembersPage() {
-    const [loading, setLoading] = useState(false);
-    const [error, setError] = useState<string | undefined>(undefined);
-    const [members, setMembers] = useState<Member[]>([]);
-    const [currentPage, setCurrentPage] = useState(1);
-    useEffect(() => {
-        async function loadMembers() {
-            setMembers([]);
-            try {
-                setLoading(true);
-                const data = await memberAPI.get(currentPage);
-                setError('');
-                setMembers(data);
-                if (currentPage === 1) {
-                    setMembers(data);
-                } else {
-                    setMembers((members) => [...members, ...data]);
-                }
-            }
-            catch (e) {
-                if (e instanceof Error) {
-                    setError(e.message);
-                }
-            } finally {
-                setLoading(false);
-            }
-        }
-        loadMembers();
-    }, [currentPage]);
-    const saveMember = (member: Member) => {
-        // console.log('Saving member: ', member);
-        // let updatedMembers = members.map((m: Member) => {
-        //     return m.id === member.id ? member : m;
-        // });
-        // setMembers(updatedMembers);
-        memberAPI
-          .put(member)
-          .then((updatedMember) => {
-                let updatedMembers = members.map((p: Member) => {
-                      return p.id === member.id ? new Member(updatedMember) : p;
-                    });
-                setMembers(updatedMembers);
-              })
-          .catch((e) => {
-                 if (e instanceof Error) {
-                      setError(e.message);
-                     }
-              });
-        
-    };
+    const {
+      members,
+      loading,
+      error,
+      setCurrentPage,
+      saveMember,
+      saving,
+      savingError,
+    } = useMembers();
+
     const handleMoreClick = () => {
         setCurrentPage((currentPage) => currentPage + 1);
     };
@@ -60,13 +20,14 @@ function MembersPage() {
         <>
             <h1>Members</h1>
             {/* <pre>{JSON.stringify(MOCK_MEMBERS, null, ' ')}</pre> */}
-            {error && (
+            {saving && <span className="toast">Saving...</span>}
+            {(error || savingError) && (
                 <div className="row">
                     <div className="card large error">
                         <section>
                             <p>
                                 <span className="icon-alert inverse "></span>
-                                {error}
+                                {error} {savingError}
                             </p>
                         </section>
                     </div>

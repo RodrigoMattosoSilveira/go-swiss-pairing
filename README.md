@@ -37,10 +37,11 @@ A tool for tournament directors to organize tournaments using the Swiss pairing 
 * [babel](https://babeljs.io/docs/en/)
 * [mini.css](https://minicss.us/docs.htm)
 * [react hands on tutorial](https://handsonreact.com/docs/props#!)
+* [Regular Expressions 101](https://regex101.com)
 
 Card | Table
 ---|-------
 MembersPage | MembersPage
-MembersList | MembersListTable
-MemberCard | MembersListTableRow
+MembersList | MembersList
+MemberCard | MembersListRow
 MemberForm | MemberFormModal
