@@ -51,7 +51,8 @@ function convertToMemberModel(item: any): Member {
 
 const memberAPI = {
     get(page = 1, limit = 20) {
-        return fetch(`${url}?_page=${page}&_limit=${limit}&_sort=first`)
+        // return fetch(`${url}?_page=${page}&_limit=${limit}&_sort=first`)
+        return fetch(`${url}?_page=${page}&_limit=${limit}`)
             // .then(delay(3000))
             .then(checkStatus)
             .then(parseJSON)
@@ -80,6 +81,12 @@ const memberAPI = {
                   );
             });
     },
+   find(id: string) {
+     return fetch(`${url}/${id}`)
+        .then(checkStatus)
+        .then(parseJSON)
+        .then(convertToMemberModel);
+   },
 };
 
 export { memberAPI };

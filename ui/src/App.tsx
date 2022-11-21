@@ -1,10 +1,11 @@
 import React from 'react';
-import MembersPage from "./members/MembersPage";
-import logo from './logo.svg';
-import './App.css';
 import { BrowserRouter as Router, Routes, Route, NavLink} from 'react-router-dom';
-import HomePage from './home/HomePage';
 
+import HomePage from './home/HomePage';
+import MembersPage from "./members/MembersPage";
+import MemberPage from "./members/MemberPage";
+
+import './App.css';
 
 function App() {
     // return (
@@ -22,14 +23,15 @@ function App() {
                     <span className="icon-home"></span>
                     Home
                 </NavLink>
-                <NavLink to="/projects" className="button rounded">
-                    Projects
+                <NavLink to="/members" className="button rounded">
+                    Members
                 </NavLink>
             </header>
             <div className="container">
                 <Routes>
                     <Route path="/" element={<HomePage/>}/>
-                    <Route path="/projects" element={<MembersPage/>}/>
+                    <Route path="/members" element={<MembersPage/>}/>
+                    <Route path="/members/:id" element={<MemberPage />} />
                 </Routes>
             </div>
         </Router>

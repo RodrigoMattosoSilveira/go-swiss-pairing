@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { Member } from './Member';
 
 interface MemberListRowProps {
@@ -25,7 +26,7 @@ function MemberListRow(props: MemberListRowProps) {
                     <span className="icon-edit"></span>
                 </button>
             </div>
-            <div className="col-sm">{member.id}</div>
+            <Link to={'/members/' + member.id}> <div className="col-sm">{member.id}</div></Link>
             <div className="col-sm">{member.first}</div>
             <div className="col-sm">{member.last}</div>
             <div className="col-sm">{member.email}</div>
