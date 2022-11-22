@@ -38,6 +38,12 @@ A tool for tournament directors to organize tournaments using the Swiss pairing 
 * [mini.css](https://minicss.us/docs.htm)
 * [react hands on tutorial](https://handsonreact.com/docs/props#!)
 * [Regular Expressions 101](https://regex101.com)
+* CSS Grids
+  * [An Introduction to CSS Grid Layout (with Examples)](https://www.freecodecamp.org/news/intro-to-css-grid-layout/) 
+  * [Table with CSS Grid](https://stackoverflow.com/questions/68141663/table-with-css-grid)
+  * [learn css grid](https://learncssgrid.com/)
+* [React Query](https://tanstack.com/query/v4)  
+* [IntelliJ File Watchers](https://www.jetbrains.com/help/idea/using-file-watchers.html)
 
 Card | Table
 ---|-------
