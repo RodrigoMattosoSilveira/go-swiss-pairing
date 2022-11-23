@@ -15,8 +15,8 @@ function MemberListRow(props: MemberListRowProps) {
         onEdit(memberBeingEdited);
     };
     return (
-        <>
-            <div className="col-sm">
+        <div key={member.id} className="row">
+            <div className="col-sm-1">
                 <button
                     className="small"
                     onClick={() => {
@@ -26,15 +26,15 @@ function MemberListRow(props: MemberListRowProps) {
                     <span className="icon-edit"></span>
                 </button>
             </div>
-            <Link to={'/members/' + member.id}> <div className="col-sm">{member.id}</div></Link>
-            <div className="col-sm">{member.first}</div>
-            <div className="col-sm">{member.last}</div>
-            <div className="col-sm">{member.email}</div>
-            <div className="col-sm">{member.cell}</div>
-            <div className="col-sm">{member.password}</div>
-            <div className="col-sm">{member.rating}</div>
-            <div className="col-sm">{member.isActive ? "Yes" : "No"}</div>
-        </>
+            <Link to={'/members/' + member.id} className="col-sm-1">{member.id}</Link>
+            <div className="col-sm-1">{member.first}</div>
+            <div className="col-sm-1">{member.last}</div>
+            <div className="col-sm-2">{member.email}</div>
+            <div className="col-sm-2">{member.cell}</div>
+            <div className="col-sm-2">{member.password}</div>
+            <div className="col-sm-1">{member.rating}</div>
+            <div className="col-sm-1">{member.isActive ? "Yes" : "No"}</div>
+        </div>
     )
 }
 
