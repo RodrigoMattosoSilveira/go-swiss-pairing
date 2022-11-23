@@ -9,8 +9,8 @@ import (
 	"io/ioutil"
 	"log"
 
+	memberGrpc "github.com/RodrigoMattosoSilveira/go-swiss-pairing/grpc/server/interface/rpc/proto/swiss-pairing-apis/member/v1"
 	"github.com/RodrigoMattosoSilveira/go-swiss-pairing/server/constants"
-	memberGrpc "github.com/RodrigoMattosoSilveira/go-swiss-pairing/server/interface/rpc/proto"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/credentials"
 )

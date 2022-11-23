@@ -2,10 +2,10 @@ package main
 
 import (
 	"flag"
+	memberGrpc "github.com/RodrigoMattosoSilveira/go-swiss-pairing/grpc/server/interface/rpc/proto/swiss-pairing-apis/member/v1"
 	"github.com/RodrigoMattosoSilveira/go-swiss-pairing/server/constants"
 	"github.com/RodrigoMattosoSilveira/go-swiss-pairing/server/domain/service"
 	repo "github.com/RodrigoMattosoSilveira/go-swiss-pairing/server/interface/persistence/memory"
-	memberGrpc "github.com/RodrigoMattosoSilveira/go-swiss-pairing/server/interface/rpc/proto"
 	pb "github.com/RodrigoMattosoSilveira/go-swiss-pairing/server/interface/rpc/server"
 	uc "github.com/RodrigoMattosoSilveira/go-swiss-pairing/server/usecase"
 	"github.com/improbable-eng/grpc-web/go/grpcweb"

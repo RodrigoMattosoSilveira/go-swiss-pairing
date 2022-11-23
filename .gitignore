@@ -25,3 +25,4 @@ server-req.pem
 node_modules
 ui/node_modules
 ui/.next
+grpc

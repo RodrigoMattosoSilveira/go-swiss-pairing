@@ -26,6 +26,7 @@ A tool for tournament directors to organize tournaments using the Swiss pairing 
   * requires [./JQ](https://stedolan.github.io/jq/) 
 * [Use gRPC with Node.js and Typescript](https://dev.to/devaddict/use-grpc-with-node-js-and-typescript-3c58) Does not show React
 * [Small Go/React/TypeScript gRPC-Web example](https://github.com/johanbrandhorst/grpc-web-go-react-example)
+* [buf](https://docs.buf.build/introduction) Integrated it, makes it easier to handle grpc
 
 # Links and References
 * Link to the [Recursive Wildcard Function](https://blog.jgc.org/2011/07/gnu-make-recursive-wildcard-function.html) I used to build a list of dependencies
@@ -33,3 +34,20 @@ A tool for tournament directors to organize tournaments using the Swiss pairing 
 * [How to Set Up gRPC Server-Side Streaming with Go](https://www.freecodecamp.org/news/grpc-server-side-streaming-with-go/)
 * [ginkgo](https://onsi.github.io/ginkgo/) - GOLANG test package that makes it similar to JASMINE and the like
 * [GOLANG Custom Errors](https://golangbot.com/custom-errors/)
+* [babel](https://babeljs.io/docs/en/)
+* [mini.css](https://minicss.us/docs.htm)
+* [react hands on tutorial](https://handsonreact.com/docs/props#!)
+* [Regular Expressions 101](https://regex101.com)
+* CSS Grids
+  * [An Introduction to CSS Grid Layout (with Examples)](https://www.freecodecamp.org/news/intro-to-css-grid-layout/) 
+  * [Table with CSS Grid](https://stackoverflow.com/questions/68141663/table-with-css-grid)
+  * [learn css grid](https://learncssgrid.com/)
+* [React Query](https://tanstack.com/query/v4)  
+* [IntelliJ File Watchers](https://www.jetbrains.com/help/idea/using-file-watchers.html)
+
+Card | Table
+---|-------
+MembersPage | MembersPage
+MembersList | MembersList
+MemberCard | MembersListRow
+MemberForm | MemberFormModal
