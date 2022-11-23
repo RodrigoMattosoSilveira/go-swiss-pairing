@@ -1,0 +1,70 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Member List Row Member List Row member={member} onEdit={handleEdit} 1`] = `
+<div
+  className="row"
+>
+  <div
+    className="col-sm-1"
+  >
+    <button
+      aria-label="member.id"
+      className="small"
+      onClick={[Function]}
+    >
+      <span
+        className="icon-edit"
+      />
+    </button>
+  </div>
+  <a
+    className="col-sm-1"
+    href="/members/mkq9OLj-Wf"
+    onClick={[Function]}
+  >
+    mkq9OLj-Wf
+  </a>
+  <div
+    aria-label="member.first"
+    className="col-sm-1"
+  >
+    Arianna
+  </div>
+  <div
+    aria-label="member.last"
+    className="col-sm-1"
+  >
+    Moody
+  </div>
+  <div
+    aria-label="member.email"
+    className="col-sm-2"
+  >
+    Arianna.Moody@yahoo.com
+  </div>
+  <div
+    aria-label="member.cell"
+    className="col-sm-2"
+  >
+    801 277-6891
+  </div>
+  <div
+    aria-label="member.password"
+    className="col-sm-2"
+  >
+    VH8q4tkg6UX3
+  </div>
+  <div
+    aria-label="member.rating"
+    className="col-sm-1"
+  >
+    1026
+  </div>
+  <div
+    aria-label="member.isActive"
+    className="col-sm-1"
+  >
+    Yes
+  </div>
+</div>
+`;

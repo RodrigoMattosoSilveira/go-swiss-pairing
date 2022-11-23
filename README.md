@@ -44,6 +44,8 @@ A tool for tournament directors to organize tournaments using the Swiss pairing 
   * [learn css grid](https://learncssgrid.com/)
 * [React Query](https://tanstack.com/query/v4)  
 * [IntelliJ File Watchers](https://www.jetbrains.com/help/idea/using-file-watchers.html)
+* [ARIA in HTML](https://www.w3.org/TR/html-aria/#docconformance) - Consulted it to find the `<div />` role
+
 
 Card | Table
 ---|-------
