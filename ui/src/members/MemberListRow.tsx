@@ -16,11 +16,11 @@ function MemberListRow(props: MemberListRowProps) {
         onEdit(memberBeingEdited);
     };
     return (
-        <div key={member.id} className="row">
+        <div className="row">
             <div className="col-sm-1">
                 <button
                     className="small"
-                    aria-label={"member.id"}
+                    aria-label={`${member.id}`}
                     onClick={() => {
                         handleEditClick(member);
                     }}

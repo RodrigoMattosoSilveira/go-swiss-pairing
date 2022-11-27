@@ -111,8 +111,11 @@ function MemberForm({member: initialMember, onSave, onCancel}: MemberFormProps) 
       );
     }
     return (
-        <form className="input-group vertical"
-              onSubmit={handleSubmit}
+        <form
+            aria-label="Edit a Member"
+            name="memberForm"
+            className="input-group vertical"
+            onSubmit={handleSubmit}
         >
             <label htmlFor="first">First Name</label>
             <input
@@ -193,7 +196,8 @@ function MemberForm({member: initialMember, onSave, onCancel}: MemberFormProps) 
             />
 
             <div className="input-group">
-                <button className="primary bordered medium">Save</button>
+                <button
+                    className="primary bordered medium">Save</button>
                 <span />
                 <button
                     type="button"
