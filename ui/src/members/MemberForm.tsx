@@ -17,7 +17,7 @@ function MemberForm({member: initialMember, onSave, onCancel}: MemberFormProps) 
         rating: ''
     });
     const handleSubmit = (event: SyntheticEvent) => {
-        console.log("handling submit")
+        // console.log("handling submit")
         event.preventDefault();
         if (!isValid()) return;
         onSave(member);
@@ -113,10 +113,10 @@ function MemberForm({member: initialMember, onSave, onCancel}: MemberFormProps) 
     return (
         <form
             aria-label="Edit a Member"
-            name="memberForm"
             className="input-group vertical"
             onSubmit={handleSubmit}
         >
+            <h3>Editing member: ${member.id}</h3>
             <label htmlFor="first">First Name</label>
             <input
                 type="text"
@@ -197,7 +197,7 @@ function MemberForm({member: initialMember, onSave, onCancel}: MemberFormProps) 
 
             <div className="input-group">
                 <button
-                    className="primary bordered medium">Save</button>
+                    className="primary bordered medium" aria-label="Cancel Edit a Member">Save</button>
                 <span />
                 <button
                     type="button"
