@@ -28,7 +28,9 @@ function MemberListRow(props: MemberListRowProps) {
                     <span className="icon-edit"></span>
                 </button>
             </div>
-            <ErrorBoundary><Link to={'/members/' + member.id} className="col-sm-1">{member.id}</Link></ErrorBoundary>
+            <ErrorBoundary>
+                <Link to={'/members/' + member.id} className="col-sm-1" aria-label={"member.id"}>{member.id}</Link>
+            </ErrorBoundary>
             <div className="col-sm-1" aria-label={"member.first"}>{member.first}</div>
             <div className="col-sm-1" aria-label={"member.last"}>{member.last}</div>
             <div className="col-sm-2" aria-label={"member.email"}>{member.email}</div>

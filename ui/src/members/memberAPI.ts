@@ -1,6 +1,6 @@
 import { Member } from './Member';
 const baseUrl = 'http://localhost:4000';
-const url = `${baseUrl}/members`;
+export const url = `${baseUrl}/members`;
 
 function translateStatusToErrorMessage(status: number) {
     switch (status) {
