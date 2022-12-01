@@ -95,8 +95,8 @@ function MemberForm({member: initialMember, onSave, onCancel}: MemberFormProps) 
             }
         }
 
-        if (member.rating === 0 || member.rating > 3000) {
-            errors.rating = 'Member rating must be between 0 and 3000';
+        if (member.rating < 1200 || member.rating > 3000) {
+            errors.rating = 'Member rating must be between 1200 and 3000';
         }
 
         return errors;
@@ -119,6 +119,8 @@ function MemberForm({member: initialMember, onSave, onCancel}: MemberFormProps) 
             <h3>Editing member: ${member.id}</h3>
             <label htmlFor="first">First Name</label>
             <input
+                id="first"
+                aria-label={"member first name"}
                 type="text"
                 name="first"
                 placeholder="enter first name"
@@ -126,13 +128,15 @@ function MemberForm({member: initialMember, onSave, onCancel}: MemberFormProps) 
                 onChange={handleChange}
             />
             {errors.first.length > 0 && (
-                <div className="card error">
+                <div role="alert" className="card error">
                     <p>{errors.first}</p>
                 </div>
            )}
 
-            <label htmlFor="last">First Name</label>
+            <label htmlFor="last">Last Name</label>
             <input
+                id="last"
+                aria-label={"member last name"}
                 type="text"
                 name="last"
                 placeholder="enter last name"
@@ -140,13 +144,15 @@ function MemberForm({member: initialMember, onSave, onCancel}: MemberFormProps) 
                 onChange={handleChange}
             />
             {errors.last.length > 0 && (
-                <div className="card error">
+                <div role="alert" className="card error">
                     <p>{errors.last}</p>
                 </div>
             )}
 
             <label htmlFor="email">Email</label>
             <input
+                id="email"
+                aria-label={"member email address"}
                 type="text"
                 name="email"
                 placeholder="enter email"
@@ -154,13 +160,15 @@ function MemberForm({member: initialMember, onSave, onCancel}: MemberFormProps) 
                 onChange={handleChange}
             />
             {errors.email.length > 0 && (
-                <div className="card error">
+                <div role="alert" className="card error">
                     <p>{errors.email}</p>
                 </div>
             )}
 
             <label htmlFor="cell">Cell</label>
             <input
+                id="cell"
+                aria-label={"member cell phone number"}
                 type="text"
                 name="cell"
                 placeholder="enter cell number"
@@ -168,13 +176,15 @@ function MemberForm({member: initialMember, onSave, onCancel}: MemberFormProps) 
                 onChange={handleChange}
             />
             {errors.cell.length > 0 && (
-                <div className="card error">
+                <div role="alert" className="card error">
                     <p>{errors.cell}</p>
                 </div>
             )}
 
             <label htmlFor="rating">Rating</label>
             <input
+                id="rating"
+                aria-label={"member rating"}
                 type="number"
                 name="rating"
                 placeholder="enter rating"
@@ -182,13 +192,15 @@ function MemberForm({member: initialMember, onSave, onCancel}: MemberFormProps) 
                 onChange={handleChange}
             />
             {errors.rating.length > 0 && (
-                <div className="card error">
+                <div role="alert" className="card error">
                     <p>{errors.rating}</p>
                 </div>
             )}
 
             <label htmlFor="isActive">Active</label>
             <input
+                id="isActive"
+                aria-label={"member status"}
                 type="checkbox"
                 name="isActive"
                 checked={member.isActive}
