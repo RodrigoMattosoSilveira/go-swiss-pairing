@@ -8,7 +8,7 @@ exports[`Member List Row Member List Row member={member} onEdit={handleEdit} 1`]
     className="col-sm-1"
   >
     <button
-      aria-label="member.id"
+      aria-label="mkq9OLj-Wf"
       className="small"
       onClick={[Function]}
     >
@@ -18,6 +18,7 @@ exports[`Member List Row Member List Row member={member} onEdit={handleEdit} 1`]
     </button>
   </div>
   <a
+    aria-label="member.id"
     className="col-sm-1"
     href="/members/mkq9OLj-Wf"
     onClick={[Function]}

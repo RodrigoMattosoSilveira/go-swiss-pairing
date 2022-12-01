@@ -44,7 +44,7 @@ function MembersPage() {
             <div className="row">
                 <div className="col-sm-12">
                 <div className="button-group fluid">
-                    <button className="button default" onClick={handleMoreClick}>
+                    <button className="button default" onClick={handleMoreClick} aria-label={"more"}>
                         More...
                     </button>
                 </div>

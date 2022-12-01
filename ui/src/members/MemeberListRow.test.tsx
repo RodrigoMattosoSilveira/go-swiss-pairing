@@ -57,7 +57,7 @@ describe("Member List Row", () => {
         // this query works screen.getByText(/edit/i)
         // but using role is better
         const user = userEvent.setup();
-        await user.click(screen.getByRole('button', { name: 'member.id' }));
+        await user.click(screen.getByRole('button', { name: member.id}));
         expect(handleEdit).toBeCalledTimes(1);
         expect(handleEdit).toBeCalledWith(member);
    });

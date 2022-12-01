@@ -14,8 +14,11 @@ A tool for tournament directors to organize tournaments using the Swiss pairing 
 * [ ] Add integration tests
     * [x] Add `server side` integration tests;
     * [ ] Add `client side` integration tests;
-* [ ] Add the react-grpc-go UI to go-swiss-pairing, replacing pingpong PingPong with the Member ping call
-* [ ] Refactor the UI to use the nexjs-ts-materio-template folder structure
+* [x] Add the react-grpc-go UI to go-swiss-pairing, replacing pingpong PingPong with the Member ping call
+* [x] Implement the [Hands On React Course](https://handsonreact.com/docs/) - I had to do it to re-learn React;
+* [ ] Re-factor the server to support all Member attributes
+* [ ] Use the [Hands On React Course](https://handsonreact.com/docs/) framework process Members; it includes extensive UI tests;
+* [ ] Migrate the Ui to use [React Material](https://mui.com/material-ui)
 * [ ] Replace the original simple react-grpc-go UI page with a simple nexjs-ts-materio-template component
 * [ ] Design the landing page, the members page, including logic to CRUD members
 
@@ -35,17 +38,33 @@ A tool for tournament directors to organize tournaments using the Swiss pairing 
 * [ginkgo](https://onsi.github.io/ginkgo/) - GOLANG test package that makes it similar to JASMINE and the like
 * [GOLANG Custom Errors](https://golangbot.com/custom-errors/)
 * [babel](https://babeljs.io/docs/en/)
-* [mini.css](https://minicss.us/docs.htm)
+
 * [react hands on tutorial](https://handsonreact.com/docs/props#!)
 * [Regular Expressions 101](https://regex101.com)
-* CSS Grids
-  * [An Introduction to CSS Grid Layout (with Examples)](https://www.freecodecamp.org/news/intro-to-css-grid-layout/) 
-  * [Table with CSS Grid](https://stackoverflow.com/questions/68141663/table-with-css-grid)
-  * [learn css grid](https://learncssgrid.com/)
-* [React Query](https://tanstack.com/query/v4)  
+* [Service Worker](https://developer.mozilla.org/en-US/docs/Web/API/Service_Worker_API) -  act as proxy servers that sit between web applications, the browser, and the network (when available)
 * [IntelliJ File Watchers](https://www.jetbrains.com/help/idea/using-file-watchers.html)
-* [ARIA in HTML](https://www.w3.org/TR/html-aria/#docconformance) - Consulted it to find the `<div />` role
-
+* User Experience
+  * Libraries
+    * [React Bootstrap](https://react-bootstrap.github.io)
+    * [React Material](https://mui.com/material-ui)
+    * [mini.css](https://minicss.us/docs.htm)
+    * [Material Design for Bootstrap 5 & React 18](https://mdbootstrap.com/docs/react/#demo)
+    * [React Bootstrap vs React Material](https://www.upgrad.com/blog/bootstrap-vs-material/)
+  * CSS Grids
+    * [An Introduction to CSS Grid Layout (with Examples)](https://www.freecodecamp.org/news/intro-to-css-grid-layout/) 
+    * [Table with CSS Grid](https://stackoverflow.com/questions/68141663/table-with-css-grid)
+    * [learn css grid](https://learncssgrid.com/)
+    * [mincss Grid system](https://minicss.us/docs.htm#grid)
+  * [React Query](https://tanstack.com/query/v4)  
+  * [ARIA in HTML](https://www.w3.org/TR/html-aria/#docconformance) - Consulted it to find the `<div />` role
+* Testing
+  * [Jest 14.0: React Tree Snapshot Testing](https://jestjs.io/blog/2016/07/27/jest-14#why-snapshot-testing) 
+  * [Test Renderer](https://reactjs.org/docs/test-renderer.html)
+  * [Functional Testing using React testing library and Jest](https://vijayt.com/post/functional-testing-using-react-testing-library-and-jest/#:~:text=We%20have%20seen%20the%20getByRole%20function.%20It%20retrieves,the%20element%20is%20not%20rendered%20in%20the%20DOM.)
+  * [Common mistakes with React Testing Library](https://kentcdodds.com/blog/common-mistakes-with-react-testing-library)
+  * [Testing Library](https://testing-library.com/) - a light-weight solution for testing web pages by querying and interacting with DOM nodes;
+  * [Mock Service Worker](https://mswjs.io/) - Mock by intercepting requests on the network level.
+  * [How can I mock or simulate gRPC APIs?](https://stackoverflow.com/questions/52919769/how-can-i-mock-or-simulate-grpc-apis)
 
 Card | Table
 ---|-------

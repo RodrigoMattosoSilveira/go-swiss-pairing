@@ -23,7 +23,7 @@ function MemberList(props: MemberListProps) {
         <div className="container">
             <div className="row"><MemberListRowHeader /></div>
             {members.map((member) => (
-                <div>
+                <div key={member.id} >
                     {member === memberBeingEdited ? (
                         <MemberForm member={member} onSave={onSave} onCancel={cancelEditing}/>
                     ) : (
