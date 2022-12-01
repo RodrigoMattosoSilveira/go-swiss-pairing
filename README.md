@@ -14,8 +14,11 @@ A tool for tournament directors to organize tournaments using the Swiss pairing 
 * [ ] Add integration tests
     * [x] Add `server side` integration tests;
     * [ ] Add `client side` integration tests;
-* [ ] Add the react-grpc-go UI to go-swiss-pairing, replacing pingpong PingPong with the Member ping call
-* [ ] Refactor the UI to use the nexjs-ts-materio-template folder structure
+* [x] Add the react-grpc-go UI to go-swiss-pairing, replacing pingpong PingPong with the Member ping call
+* [x] Implement the [Hands On React Course](https://handsonreact.com/docs/) - I had to do it to re-learn React;
+* [ ] Re-factor the server to support all Member attributes
+* [ ] Use the [Hands On React Course](https://handsonreact.com/docs/) framework process Members; it includes extensive UI tests;
+* [ ] Migrate the Ui to use [React Material](https://mui.com/material-ui)
 * [ ] Replace the original simple react-grpc-go UI page with a simple nexjs-ts-materio-template component
 * [ ] Design the landing page, the members page, including logic to CRUD members
 
