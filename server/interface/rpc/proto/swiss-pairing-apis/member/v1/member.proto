@@ -14,13 +14,23 @@ message MemberEmpty {}
 
 message NewMember {
     string first = 1;
-    string email = 2;
+    string last = 2;
+    string email = 3;
+    string password = 4;
+    string cell = 5;
+    int32 rating = 6;
 }
 
 message Member {
     string id = 1;
     string first = 2;
+    string last = 3;
     string email = 3;
+    string password = 4;
+    string cell = 5;
+    int32 rating = 6;
+    bool isActive = 7;
+    string imageUrl = 8;
 }
 
 message MemberId {
