@@ -7,11 +7,16 @@ import (
 	"sync"
 )
 
-// It
 type MemberMemory struct {
-	Id    string
-	First string
-	Email string
+	Id       string
+	First    string
+	Last     string
+	Email    string
+	Password string
+	Cell     string
+	Rating   int32
+	IsActive bool
+	ImageUrl string
 }
 
 type MemberRepository struct {
@@ -31,9 +36,15 @@ func (r *MemberRepository) Create(Member *model.Member) (*model.Member, error) {
 	defer r.mu.Unlock()
 
 	r.Members[Member.Id()] = &MemberMemory{
-		Id:    Member.Id(),
-		First: Member.First(),
-		Email: Member.Email(),
+		Id:       Member.Id(),
+		First:    Member.First(),
+		Last:     Member.Id(),
+		Email:    Member.Email(),
+		Password: Member.Password(),
+		Cell:     Member.Cell(),
+		Rating:   Member.Rating(),
+		IsActive: Member.IsActive(),
+		ImageUrl: Member.ImageUrl(),
 	}
 	return Member, nil
 }
@@ -45,7 +56,7 @@ func (r *MemberRepository) Read() ([]*model.Member, error) {
 	users := make([]*model.Member, len(r.Members))
 	i := 0
 	for _, Member := range r.Members {
-		users[i] = model.Create(Member.Id, Member.First, Member.Email)
+		users[i] = model.Create(Member.Id, Member.First, Member.Last, Member.Email, Member.Password, Member.Cell, Member.Rating, Member.IsActive, Member.ImageUrl)
 		i++
 	}
 	return users, nil
@@ -57,7 +68,7 @@ func (r *MemberRepository) ReadById(id string) (*model.Member, error) {
 
 	for _, Member := range r.Members {
 		if Member.Id == id {
-			return model.Create(Member.Id, Member.First, Member.Email), nil
+			return model.Create(Member.Id, Member.First, Member.Last, Member.Email, Member.Password, Member.Cell, Member.Rating, Member.IsActive, Member.ImageUrl), nil
 		}
 	}
 	// https://golangbot.com/custom-errors/
@@ -71,7 +82,7 @@ func (r *MemberRepository) ReadByEmail(email string) (*model.Member, error) {
 
 	for _, Member := range r.Members {
 		if Member.Email == email {
-			return model.Create(Member.Id, Member.First, Member.Email), nil
+			return model.Create(Member.Id, Member.First, Member.Last, Member.Email, Member.Password, Member.Cell, Member.Rating, Member.IsActive, Member.ImageUrl), nil
 		}
 	}
 	return nil, errors.New(fmt.Sprintf("did not find member with email: %s", email))
