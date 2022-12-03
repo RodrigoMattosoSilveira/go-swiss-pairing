@@ -21,7 +21,7 @@ func NewMemberGrpcServer(useCase *usecase.MemberUsecase) *MemberGrpcServer {
 }
 
 func (c *MemberGrpcServer) Create(_ context.Context, Member *cm.NewMember) (*cm.Member, error) {
-	cMember, cMemberError := c.useCase.Create(Member.First, Member.Email)
+	cMember, cMemberError := c.useCase.Create(Member.First, Member.Last, Member.Email, Member.Password, Member.Cell)
 	if cMemberError != nil {
 		return nil, cMemberError
 	}

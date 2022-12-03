@@ -35,10 +35,8 @@ A tool for tournament directors to organize tournaments using the Swiss pairing 
 * Link to the [Recursive Wildcard Function](https://blog.jgc.org/2011/07/gnu-make-recursive-wildcard-function.html) I used to build a list of dependencies
 * [Using gRPC with TLS, Golang and React (No Envoy)](https://itnext.io/using-grpc-with-tls-golang-and-react-no-envoy-92e898bf8463)
 * [How to Set Up gRPC Server-Side Streaming with Go](https://www.freecodecamp.org/news/grpc-server-side-streaming-with-go/)
-* [ginkgo](https://onsi.github.io/ginkgo/) - GOLANG test package that makes it similar to JASMINE and the like
 * [GOLANG Custom Errors](https://golangbot.com/custom-errors/)
 * [babel](https://babeljs.io/docs/en/)
-
 * [react hands on tutorial](https://handsonreact.com/docs/props#!)
 * [Regular Expressions 101](https://regex101.com)
 * [Service Worker](https://developer.mozilla.org/en-US/docs/Web/API/Service_Worker_API) -  act as proxy servers that sit between web applications, the browser, and the network (when available)
@@ -58,13 +56,22 @@ A tool for tournament directors to organize tournaments using the Swiss pairing 
   * [React Query](https://tanstack.com/query/v4)  
   * [ARIA in HTML](https://www.w3.org/TR/html-aria/#docconformance) - Consulted it to find the `<div />` role
 * Testing
-  * [Jest 14.0: React Tree Snapshot Testing](https://jestjs.io/blog/2016/07/27/jest-14#why-snapshot-testing) 
-  * [Test Renderer](https://reactjs.org/docs/test-renderer.html)
-  * [Functional Testing using React testing library and Jest](https://vijayt.com/post/functional-testing-using-react-testing-library-and-jest/#:~:text=We%20have%20seen%20the%20getByRole%20function.%20It%20retrieves,the%20element%20is%20not%20rendered%20in%20the%20DOM.)
-  * [Common mistakes with React Testing Library](https://kentcdodds.com/blog/common-mistakes-with-react-testing-library)
-  * [Testing Library](https://testing-library.com/) - a light-weight solution for testing web pages by querying and interacting with DOM nodes;
-  * [Mock Service Worker](https://mswjs.io/) - Mock by intercepting requests on the network level.
-  * [How can I mock or simulate gRPC APIs?](https://stackoverflow.com/questions/52919769/how-can-i-mock-or-simulate-grpc-apis)
+  * Server
+    * GINKGO
+      * [Ginkgo](https://onsi.github.io/ginkgo/#running-specs)
+      * **All TESTS** Execute the following command: `$ ginkgo ./...`
+      * **Specific suite** Execute the following command: `ginkgo --focus "test 1" testDir`
+    * [Password Validator for GO](https://libraries.io/go/github.com%2Fgo-passwd%2Fvalidator)
+  * UI
+    * [Testing Library](https://testing-library.com/) - a light-weight solution for testing web pages by querying and interacting with DOM nodes;
+    * [Jest 14.0: React Tree Snapshot Testing](https://jestjs.io/blog/2016/07/27/jest-14#why-snapshot-testing) 
+    * [Test Renderer](https://reactjs.org/docs/test-renderer.html)
+    * [Functional Testing using React testing library and Jest](https://vijayt.com/post/functional-testing-using-react-testing-library-and-jest/#:~:text=We%20have%20seen%20the%20getByRole%20function.%20It%20retrieves,the%20element%20is%20not%20rendered%20in%20the%20DOM.)
+    * [Common mistakes with React Testing Library](https://kentcdodds.com/blog/common-mistakes-with-react-testing-library)
+    * [Mock Service Worker](https://mswjs.io/) - Mock by intercepting requests on the network level.
+    * [How can I mock or simulate gRPC APIs?](https://stackoverflow.com/questions/52919769/how-can-i-mock-or-simulate-grpc-apis)
+ 
+  
 
 Card | Table
 ---|-------
