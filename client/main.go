@@ -4,10 +4,12 @@ import (
 	"context"
 	"crypto/tls"
 	"crypto/x509"
+	"encoding/json"
 	"flag"
 	"io"
 	"io/ioutil"
 	"log"
+	"os"
 
 	memberGrpc "github.com/RodrigoMattosoSilveira/go-swiss-pairing/grpc/server/interface/rpc/proto/swiss-pairing-apis/member/v1"
 	"github.com/RodrigoMattosoSilveira/go-swiss-pairing/server/constants"
@@ -17,17 +19,36 @@ import (
 
 /*
  Usage: ./server/client/main --op ping
-         ./server/client/main --op create --name <<name>>   --email <<email>>
-		 ./server/client/main --op read
-		 ./server/client/main --op readEmail --email <<email>>
-		 ./server/client/main --op readId --id <<id>>
+         ./client/main --op create --first <<first>>  --last <<last>> --email <<email>> --password <<password>> --cell <<cell>>
+		 ./client/main --op read
+		 ./client/main --op readEmail --email <<email>>
+		 ./client/main --op readId --id <<id>>
+		 ./client/main --op seed --seedData <<folder name>>
 */
+
+type Member struct {
+	Id       string
+	First    string
+	Last     string
+	Email    string
+	Password string
+	Cell     string
+	Rating   int32
+	IsActive bool
+	ImageUrl string
+}
+
 func main() {
-	var op, id, name, email string
+	var op, id, first, last, email, password, cell, seedData string
 	flag.StringVar(&op, "op", "ping", "the operation we want to execute")
 	flag.StringVar(&id, "id", "", "the member id")
-	flag.StringVar(&name, "name", "", "the member name")
-	flag.StringVar(&email, "email", "", "the member email")
+	flag.StringVar(&first, "first", "", "the member first name")
+	flag.StringVar(&last, "last", "", "the member last name")
+	flag.StringVar(&email, "email", "", "the member email address")
+	flag.StringVar(&password, "password", "", "the member password name")
+	flag.StringVar(&cell, "cell", "", "the member cell phone number")
+	flag.StringVar(&seedData, "seedData", "", "the seed data filename")
+
 	flag.Parse()
 
 	ctx := context.Background()
@@ -57,7 +78,7 @@ func main() {
 		}
 		log.Println(pong)
 	case "create":
-		newMember, err := clientMemberCreate(client, ctx, name, email)
+		newMember, err := clientMemberCreate(client, ctx, first, last, email, password, cell)
 		if err != nil {
 			log.Fatal(err)
 		}
@@ -102,6 +123,46 @@ func main() {
 			log.Fatal(err)
 		}
 		log.Printf("Created: id: %s name: %s email: %s\n", member.Id, member.First, member.Email)
+	case "seed":
+		log.Printf("Seeding the in-memory database")
+		if seedData == "NONE" {
+			log.Fatal("Seed data file not provided")
+		}
+		if _, err := os.Stat(seedData); err == nil {
+			log.Printf("Found seedData: %s \n", seedData)
+		} else {
+			log.Fatalf("Did not find seedData: %s", seedData)
+		}
+		// Read the seedData file
+		fileContent, err := os.Open(seedData)
+		if err != nil {
+			log.Fatal("Error opening seedData file: ", err)
+		}
+		defer fileContent.Close()
+		seedDataContent, err := ioutil.ReadFile(seedData)
+		if err != nil {
+			log.Fatal("Error reading seedData file: ", err)
+		}
+
+		// Unmarshall the data into `payload`
+		var payload []Member
+		err = json.Unmarshal(seedDataContent, &payload)
+		if err != nil {
+			log.Fatal("Error Unmarshalling seedData: ", err)
+		}
+
+		// Seed the memory database
+		for _, member := range payload {
+			// the value of v is assigned to a new local variable v
+			member := member
+			log.Printf("Seeding member: is %s\n", member.Email)
+			newMember, error := clientMemberCreate(client, ctx, member.First, member.Last, member.Email, member.Password, member.Cell)
+			if error != nil {
+				log.Printf("Error seeding member: %s", member.Email)
+				log.Fatalf(error.Error())
+			}
+			log.Printf("Success seeding member id: is %s\n", newMember.Email)
+		}
 	default:
 		log.Printf("Invalid operation: %s\n\n", op)
 	}
@@ -121,10 +182,12 @@ func loadTLSCfg() *tls.Config {
 	return config
 }
 
-func clientMemberCreate(client memberGrpc.MemberServiceClient, ctx context.Context, name string, email string) (*memberGrpc.Member, error) {
-	log.Printf("client/main/clientMemberCreate: called")
-	member, error := client.Create(ctx, &memberGrpc.NewMember{First: name, Email: email})
-	log.Printf("client/main/clientMemberCreate: back from server")
-	log.Printf(error.Error())
-	return member, error
+func clientMemberCreate(client memberGrpc.MemberServiceClient, ctx context.Context, first string, last string, email string, password string, cell string) (*memberGrpc.Member, error) {
+	//log.Printf("client/main/clientMemberCreate: called")
+	member, error := client.Create(ctx, &memberGrpc.NewMember{First: first, Last: last, Email: email, Password: password, Cell: cell})
+	if error != nil {
+		return nil, error
+	}
+	log.Printf("Sucess seeding member: %s", email)
+	return member, nil
 }
