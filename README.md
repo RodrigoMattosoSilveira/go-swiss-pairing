@@ -70,7 +70,12 @@ A tool for tournament directors to organize tournaments using the Swiss pairing 
     * [Common mistakes with React Testing Library](https://kentcdodds.com/blog/common-mistakes-with-react-testing-library)
     * [Mock Service Worker](https://mswjs.io/) - Mock by intercepting requests on the network level.
     * [How can I mock or simulate gRPC APIs?](https://stackoverflow.com/questions/52919769/how-can-i-mock-or-simulate-grpc-apis)
- 
+* 00035-seed-server-data
+  * [Fresh](https://github.com/gravityblast/fresh) command line tool that builds and (re)starts your web application everytime you save a Go or template file.
+  * [Golang Config Server as a Service](https://medium.com/@ahmet9417/golang-config-server-as-a-service-3655bf832c2d) - I like the purpose, but it seems an overkill for where I am now
+  * [My Ultimate Makefile for Golang Projects](https://betterprogramming.pub/my-ultimate-makefile-for-golang-projects-fcc8ca20c9bb) It has a mechanism to build a docker image and launch it; still a bit more than I want to chew right now
+  * [entr](https://eradman.com/entrproject/) Tryed to use it to watch changes, got permission denied messages, moved on for now
+  * [Golang – Read JSON File](https://golangdocs.com/golang-read-json-file)
   
 
 Card | Table
