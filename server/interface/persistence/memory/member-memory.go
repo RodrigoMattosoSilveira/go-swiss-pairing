@@ -38,7 +38,7 @@ func (r *MemberRepository) Create(Member *model.Member) (*model.Member, error) {
 	r.Members[Member.Id()] = &MemberMemory{
 		Id:       Member.Id(),
 		First:    Member.First(),
-		Last:     Member.Id(),
+		Last:     Member.Last(),
 		Email:    Member.Email(),
 		Password: Member.Password(),
 		Cell:     Member.Cell(),

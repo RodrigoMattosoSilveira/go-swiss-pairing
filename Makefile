@@ -64,7 +64,7 @@ $(CERT_SERVER_PEM) : $(CERT_SCRIPT) $(CERT_CONF)
 
 ## Generate the gRPC files
 $(PB_GO_FILES): $(PROTO_FILES)
-	buf generate --template ./server/interface/rpc/buf.gen.yamlmrs
+	buf generate --template ./server/interface/rpc/buf.gen.yaml
 
 
 # Build Server

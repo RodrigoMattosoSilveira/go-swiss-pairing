@@ -18,19 +18,18 @@ message NewMember {
     string email = 3;
     string password = 4;
     string cell = 5;
-    int32 rating = 6;
 }
 
 message Member {
     string id = 1;
     string first = 2;
     string last = 3;
-    string email = 3;
-    string password = 4;
-    string cell = 5;
-    int32 rating = 6;
-    bool isActive = 7;
-    string imageUrl = 8;
+    string email = 4;
+    string password = 5;
+    string cell = 6;
+    int32 rating = 7;
+    bool is_active = 8;
+    string image_url = 9;
 }
 
 message MemberId {

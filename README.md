@@ -58,6 +58,9 @@ A tool for tournament directors to organize tournaments using the Swiss pairing 
   * [React Query](https://tanstack.com/query/v4)  
   * [ARIA in HTML](https://www.w3.org/TR/html-aria/#docconformance) - Consulted it to find the `<div />` role
 * Testing
+  * GINKGO
+    * **All TESTS** Execute the following command: `$ ginkgo ./...` 
+    * **Specific suite** Execute the following command: `ginkgo --focus "test 1" testDir`
   * [Jest 14.0: React Tree Snapshot Testing](https://jestjs.io/blog/2016/07/27/jest-14#why-snapshot-testing) 
   * [Test Renderer](https://reactjs.org/docs/test-renderer.html)
   * [Functional Testing using React testing library and Jest](https://vijayt.com/post/functional-testing-using-react-testing-library-and-jest/#:~:text=We%20have%20seen%20the%20getByRole%20function.%20It%20retrieves,the%20element%20is%20not%20rendered%20in%20the%20DOM.)
@@ -65,6 +68,8 @@ A tool for tournament directors to organize tournaments using the Swiss pairing 
   * [Testing Library](https://testing-library.com/) - a light-weight solution for testing web pages by querying and interacting with DOM nodes;
   * [Mock Service Worker](https://mswjs.io/) - Mock by intercepting requests on the network level.
   * [How can I mock or simulate gRPC APIs?](https://stackoverflow.com/questions/52919769/how-can-i-mock-or-simulate-grpc-apis)
+  * [Ginkgo](https://onsi.github.io/ginkgo/#running-specs)
+  * [Password Validator for GO](https://libraries.io/go/github.com%2Fgo-passwd%2Fvalidator)
 
 Card | Table
 ---|-------

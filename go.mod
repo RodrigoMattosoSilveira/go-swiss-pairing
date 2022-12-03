@@ -16,6 +16,7 @@ require (
 	github.com/cenkalti/backoff/v4 v4.1.1 // indirect
 	github.com/desertbit/timer v0.0.0-20180107155436-c41aec40b27f // indirect
 	github.com/go-logr/logr v1.2.3 // indirect
+	github.com/go-passwd/validator v0.0.0-20180902184246-0b4c967e436b // indirect
 	github.com/golang/protobuf v1.5.2 // indirect
 	github.com/google/go-cmp v0.5.9 // indirect
 	github.com/klauspost/compress v1.11.7 // indirect
